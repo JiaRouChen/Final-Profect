@@ -1,0 +1,462 @@
+﻿@* @using System.Security.Policy *@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>月月湯湯線上購</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        header {
+            background-color: rgba(35,28,26,0.8);
+            height: 80px;
+            width: 93%;
+            position: fixed;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            z-index: 1000;
+        }
+
+        h1 {
+            color: white;
+            position: absolute;
+            left: 120px;
+            top: 0;
+            line-height: 80px;
+            background-image: url(images/logo.svg);
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 210px;
+            text-indent: -9999px;
+            font-size: 5rem;
+        }
+
+        header ul {
+            position: absolute;
+            right: 5vw;
+            top: 0;
+            line-height: 80px;
+            z-index: 1000;
+        }
+
+        header li {
+            display: inline;
+            margin-right: 4vw;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+        }
+
+            header a:hover {
+                text-decoration: underline;
+            }
+
+        main {
+            padding-top: 100px; /* Adjust this if necessary to make room for the fixed header */
+        }
+
+        .news {
+            display: flex;
+            align-items: center;
+            gap: 20px; /* Space between image and text */
+            padding: 20px; /* Add padding if needed */
+        }
+            .news h1{
+                font-size:70px;
+                }
+            .news img {
+                max-width: 100%; /* Ensure image scales properly */
+                height: auto;
+                border-radius: 8px; /* Optional: add rounded corners */
+            }
+
+            .news div {
+                max-width: 600px; /* Adjust width of text container */
+            }
+
+        #soup-message {
+            text-align: center;
+            font-weight: bold;
+            background-color: antiquewhite;
+            padding: 20px;
+            font-size: 2rem;
+           
+        
+        }
+
+        .move-up {
+            margin-top: -15cm; /* Moves the image up by 3 cm */
+        }
+
+
+        #clock {
+            width: 20%;
+            height: 20%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        path {
+            stroke: #09151b;
+            stroke-linecap: round;
+            stroke-width: 42;
+            fill: none;
+        }
+
+        #sec {
+            stroke: #6f7f24;
+            stroke-width: 20;
+        }
+
+        #min {
+            stroke: #3d601b;
+            stroke-width: 38;
+        }
+
+        #hour {
+            stroke: #13441e;
+            stroke-width: 38;
+        }
+
+
+
+        .typing-text {
+            font-family: monospace;
+   /*          white-space: pre-wrap; /* Allows text to wrap */ */
+            overflow: hidden;
+            border-right: 1px solid;
+            display: inline;
+           /*  white-space: pre; */
+        }
+
+
+        #soup-message {
+            text-align: center;
+            font-weight: bold;
+            position: relative;
+            font-family: Arial, sans-serif;
+            font-size:25 px;
+        /*     white-space: pre-wrap; /* 保持換行 */ */
+        }
+
+
+        .flip-card {
+            background-color: transparent;
+            width: 300px; /* 根据需要调整 */
+            height: 200px; /* 根据需要调整 */
+            perspective: 1000px; /* 给翻牌一个深度 */
+            margin: 0 auto; /* 居中对齐 */
+        }
+
+        /* 翻牌内部容器 */
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d; /* 保持 3D 变换效果 */
+        }
+
+        /* 翻牌的前面 */
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden; /* 隐藏背面内容 */
+        }
+
+        /* 翻牌的背面 */
+        .flip-card-back {
+            background-color: #f1f1f1; /* 背面背景色 */
+            color: black; /* 背面文本颜色 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: rotateY(180deg); /* 背面旋转 180 度 */
+        }
+
+        /* 鼠标悬停时翻转 */
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+
+
+        .center-content {
+            text-align: center; /* Center-aligns the text and inline elements inside this div */
+            margin-top: 20px; /* Adds some space above the centered content */
+        }
+
+        #fetchDogImageButton {
+            background-color: #007bff; /* Blue background color for the button */
+            border: none; /* Removes the default border */
+            color: white; /* White text color */
+            padding: 10px 20px; /* Adds padding to the button */
+            font-size: 16px; /* Increases the font size */
+            border-radius: 5px; /* Rounds the corners of the button */
+            cursor: pointer; /* Changes the cursor to a pointer on hover */
+            transition: background-color 0.3s ease; /* Smooth transition for background color change */
+        }
+
+            #fetchDogImageButton:hover {
+                background-color: #0056b3; /* Darker blue on hover */
+            }
+
+        #dogImageContainer {
+            display: inline-block; /* Ensures the image container respects the text alignment */
+        }
+
+        #dogImage {
+            max-width: 200px; /* Limits the width of the image */
+            height: auto; /* Keeps the image aspect ratio */
+            display: block; /* Ensures the image is a block element for centering */
+            margin: 0 auto; /* Centers the image within its container */
+        }
+
+
+          
+    </style>
+</head>
+<body>
+            <header>
+                <nav class="banner">
+                    <ul>
+                        <li><a href="http://localhost:5230/MainPage/Create">首頁</a></li>
+                        <li><a href="http://localhost:5230/About/Index">認識我們</a></li>
+                <li><a href="http://localhost:5230/Overview/Index">商品總覽</a></li>
+                <li><a href="http://localhost:5230/PostBooks">顧客留言區</a></li>
+                         <li><a href="http://localhost:5230/Members/Login">會員登入</a></li>
+                         <li><a href="http://localhost:5230/Admins/Login">管理員登入</a></li>
+                    </ul>
+                </nav>
+            </header>
+    <div id="soup-message" style="text-align: center; font-weight: bold; position: relative;">
+        「讓我為你煮一碗熱騰騰的湯。」 
+        <br>🐷 貪吃豬：那個來好痛什麼都不想吃欸😣
+        <br>😼愛煮貓：不行～我來煮湯給妳喝！
+        <br>🍲一碗從愛出發，暖呼呼、熱騰騰又營養的湯成了每個月的日常。
+
+    </div>
+
+   
+    <section class="news">
+        <!-- Image -->
+        <div class="text-center mb-4 move-up">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="~/lib/SeedSourcePhoto/11.JPG" alt="專業相伴" class="img-fluid">
+                    </div>
+                    <div class="flip-card-back">
+                        <!-- 你可以在这部分添加翻牌后的内容 -->
+                        <p>
+                            謝謝長久以來湯粉支持我們！<br>
+                            <a href="http://localhost:5230/cartindex.html">
+                                <button class="btn btn-success">了解更多</button>
+                                </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       
+
+        <div class="container mt-4">
+            <div id="clock">
+                <svg height="100" width="100" viewBox="0 0 1000 1000">
+                    <path d="M978,500c0,263.99-214.01,478-478,478s-478-214.01-478-478,214.01-478,478-478,478,214.01,478,478zm-888.93,237.25,20.179-11.65m779.16-449.85l22.517-13m-648.18,648.18,11.65-20.18m449.85-779.16l13-22.517m-711.75,410.93h23.305m899.7,0h26m-885.43-237.25,20.179,11.65m779.16,449.85,22.517,13m-648.18-648.18l11.652,20.183m449.85,779.16,13,22.517m-237.25-885.43v23.305m0,899.7,0,26" />
+                    <path d="M500,500,500,236" id="hour" />
+                    <path d="M500,500,500,120" id="min" />
+                    <path d="M500,500,500,90" id="sec" />
+                </svg>
+            </div>
+            <br>
+            <p class="typing-text">🍲「每個月，為妳煮一碗熱騰騰的湯。」
+                <br>為了每個月月經來吃不下正餐的 #貪吃豬🐷， #愛煮貓😺親自下廚，像魔法師
+                <br>一樣變出暖呼呼熱騰騰的一道道湯品。
+                <br>「月月湯湯」品牌的起心動念以女性為出發點，希望讓經期來吃不下正餐的女生，
+                <br>喝一碗暖呼呼、好喝又充滿營養的湯，不僅可以讓身體熱起來，心更是溫暖無比。
+                <br>願本獨自來到世上，孑然一身的我們，遇見相知相惜的夥伴，被包容於所愛之人，
+                <br>甚至於廣袤無窮的天地萬物之間。
+                <br>希望從每一道湯品，都能由衷地使我們想起那些包容著、愛著我們的人事物，並且
+                <br>將這份溫暖傳遞給身邊的人。</p>
+           
+           @*  <p class="mb-3">🍲「每個月，為妳煮一碗熱騰騰的湯。」</p>
+
+            <p class="mb-3">為了每個月月經來吃不下正餐的 #貪吃豬🐷， #愛煮貓😺親自下廚，像魔法師🪄一樣變出暖呼呼熱騰騰的一道道湯品。</p>
+
+            <p class="mb-3">「月月湯湯」品牌的起心動念以女性為出發點，希望讓經期來吃不下正餐的女生，喝一碗暖呼呼、好喝又充滿營養的湯，不僅可以讓身體熱起來，心更是溫暖無比。</p>
+
+            <p class="mb-3">願本獨自來到世上，孑然一身的我們，遇見相知相惜的夥伴，被包容於所愛之人，甚至於廣袤無窮的天地萬物之間。</p>
+
+            <p class="mb-3">希望從每一道湯品，都能由衷地使我們想起那些包容著、愛著我們的人事物，並且將這份溫暖傳遞給身邊的人。</p>
+ *@
+            <div class="alert alert-info mb-4" role="alert">
+                <strong>重 大 消 息 公 告</strong>
+                <ul>
+                    <li>✸ 以往每個月限量的真空冷凍包終於可以常態製作啦！</li>
+                    <li>✸ 雙北地區自取者可以透過官方 Line 或 IG 私訊訂購！外縣市湯粉則要麻煩用 7-11 賣貨便下單！</li>
+                    <li>（連結🔗都在留言區，或直接掃下方圖中 QR code！）</li>
+                    <li>✸ 最新優惠活動：消費滿 600$ 折 50$、消費滿 1000$ 折 100$（不限品項只計總額唷！）</li>
+                </ul>
+            </div>
+
+            <p class="mb-3">衷心感謝各位湯粉從我們草創時期一直以來的支持，邁向品牌經營的第二年，我們不能再止步不前啦！勢必要做些變化！</p>
+
+            <p class="mb-3">我們改善了作業流程、升級了設備，所以每個月的出產量可以更多啦～唷呼ღ</p>
+
+            <p class="mb-3">但礙於人力限制（目前就只有貓咪大廚跟貪吃豬兩個人😝🤭），大家下單之後，我們製作大概需要 1～1.5 週，如果是外縣市湯粉需要宅配的，可能至多需要 2 週時間唷！</p>
+
+            <p class="mb-3">但我們會全力以赴儘快出貨的！所以大家就放心定吧😊👌</p>
+
+            <p class="mb-3">目前我們湯品有以下這些，每一道都是我們用心研發的創意湯品，強調保留食材原味不過度調味，健康營養好喝！未來也會繼續努力研發的！~</p>
+
+            <ul>
+                <li>✸ 每一包都是 1200ml 唷！約為 2 人一餐的湯品份量，一個人吃當正餐加點麵食可以吃~~很飽😉</li>
+                <li>⌂ 柑橘蔥雞湯</li>
+                <li>⌂ 酸白菜椰奶雞湯</li>
+                <li>⌂ 酸白菜椰奶蔬食湯</li>
+                <li>⌂ 梅子剝皮辣椒雞湯</li>
+                <li>⌂ 番茄紅酒燉牛肉湯</li>
+            </ul>
+        </div>
+    </section>
+    <div class="center-content">
+        <button id="fetchDogImageButton" class="btn btn-primary">點我看驚喜(抓取公開api顯示)</button>
+        <br>
+        <br>
+        <p>多買一包拉🐶</p>
+        <div id="dogImageContainer">
+            <img id="dogImage" src="" alt="隨機狗狗圖片" style="display: none;"> <!-- Hide the image initially -->
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            let $textElement = $('.typing-text');
+            let text = $textElement.html(); // Get HTML to include <br> tags
+            $textElement.html('');
+
+            function typeText(index) {
+                if (index < text.length) {
+                    $textElement.html(text.substring(0, index + 1));
+                    setTimeout(function () {
+                        typeText(index + 1);
+                    }, 50);
+                }
+            }
+
+            typeText(0);
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            let colors = ['#c0392b', '#d6cfcf', '#6f4f28', '#ff6f61', '#a2c2e1'];
+            let index = 0;
+
+            function changeColor() {
+                $('#soup-message').css('color', colors[index]);
+                index = (index + 1) % colors.length;
+            }
+
+            setInterval(changeColor, 1000);
+        });
+    </script>
+
+
+</body>
+
+
+
+<script>
+    setInterval(function () {
+        function r(el, deg) {
+            el.setAttribute('transform', 'rotate(' + deg + ' 500 500)')
+        }
+        var d = new Date()
+        r(sec, 6 * d.getSeconds())
+        r(min, 6 * d.getMinutes())
+        r(hour, 30 * (d.getHours() % 12) + d.getMinutes() / 2)
+    }, 1000)
+</script>
+
+
+
+<script>
+    $(document).ready(function () {
+        let $textElement = $('.typing-text');
+        let text = $textElement.text();
+        $textElement.text('');
+
+        function typeText(index) {
+            if (index < text.length) {
+                $textElement.append(text[index++]);
+                setTimeout(function () {
+                    typeText(index);
+                }, 50);
+            }
+        }
+
+        typeText(0);
+    });
+</script>
+
+<script>
+    // script.js
+    $(document).ready(function () {
+        $('.flip-card').click(function () {
+            $(this).find('.flip-card-inner').toggleClass('flipped');
+        });
+    });
+
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const button = document.getElementById('fetchDogImageButton');
+        const dogImage = document.getElementById('dogImage');
+
+        button.addEventListener('click', function () {
+            fetch('https://dog.ceo/api/breeds/image/random')
+                .then(response => response.json()) // 將響應轉換為 JSON
+                .then(data => {
+                    // 顯示隨機狗狗圖片
+                    dogImage.src = data.message;
+                    dogImage.alt = '隨機狗狗圖片'; // Update alt text
+                    dogImage.style.display = 'block'; // Show the image
+                })
+                .catch(error => {
+                    // 錯誤處理
+                    console.error('獲取狗狗圖片失敗:', error);
+                    dogImage.src = '';
+                    dogImage.alt = '獲取狗狗圖片失敗';
+                    dogImage.style.display = 'none'; // Hide the image if there's an error
+                });
+        });
+    });
+</script>
+
+  
+</html>
