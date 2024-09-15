@@ -1,0 +1,1012 @@
+﻿@* @using System.Security.Policy *@
+@{
+    Layout = null;
+    var imageUrls = new List<string>();
+    // for (int i = 1; i <= 10; i++)
+    // {
+    //     imageUrls.Add(Url.Content($"~/lib/SeedSourcePhoto/{i}.JPG"));
+    // }
+    string a = "";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>月月湯湯線上購</title>
+    <style>
+
+
+
+
+
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        header {
+            background-color: rgba(35,28,26,0.8);
+            height: 60px;
+            width: 93%;
+            position: fixed;
+            left: 50%; /* Set left to 50% of the viewport */
+            top: 0; /* Ensure it sticks to the top */
+            transform: translateX(-50%); /* Offset by half its width to center */
+            z-index: 1000; /* Ensure it's above other elements */
+        }
+
+        h1 {
+            color: white;
+            position: absolute;
+            left: 120px;
+            top: 0;
+            line-height: 80px;
+            background-image: url(images/logo.svg);
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 210px;
+            text-indent: -9999px;
+        }
+
+        header ul {
+            position: absolute;
+            right: 5vw;
+            top: 0;
+            line-height: 80px;
+            z-index: 1000; /* Adjust this value if necessary */
+        }
+
+        header li {
+            display: inline;
+            margin-right: 2vw;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+            font-size:85%;
+        }
+
+            header a:hover {
+                text-decoration: underline;
+            }
+
+        .news {
+            background-color: #FBEFE1;
+            color: #e2a10a;
+            height: 90vh;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .news h1 {
+                font-size: 60px;
+                margin-top: 10px;
+            }
+
+            .news h3 {
+                font-size: 60px;
+                margin-top: 20px;
+            }
+
+            .news p {
+                color: #e2a10a;
+                font-size: 18px;
+                margin: 25px 0;
+            }
+
+            .news a {
+                color: #e2a10a;
+                text-decoration: none;
+                border: 1px solid #ACACAC;
+                padding: 10px 20px;
+                border-radius: 5px;
+            }
+
+        .slogan {
+            background-color: #485652;
+            color: white;
+            height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            line-height: 1.8em;
+        }
+
+        .shop {
+            display: flex;
+        }
+
+            .shop img {
+                width: 50%;
+            }
+
+        .info {
+            width: 75%;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .info h2 {
+                font-size: 40px;
+                margin-bottom: 20px;
+            }
+
+            .info p {
+                text-align: center;
+                line-height: 2em;
+            }
+
+            .info img {
+                display: block; /* Remove extra space below the image */
+                margin: 0; /* Remove default margin */
+                float: left; /* Align the image to the left */
+            }
+
+
+        .newsletter {
+            background-color: #485652;
+            color: white;
+            padding: 60px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height:10%
+        }
+
+            .newsletter p {
+                margin-bottom: 20px;
+            }
+
+            .newsletter input, .newsletter button {
+                background-color: transparent;
+                color: white;
+                border: 1px solid #949d9a;
+                padding: 10px;
+                border-radius: 5px;
+                ;
+            }
+
+            .newsletter input {
+                width: 200px;
+                margin-right: 15px;
+                ;
+            }
+
+            .newsletter button {
+                width: 80px;
+                cursor: pointer;
+            }
+
+        input::placeholder {
+            color: #DDDDDD;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #E0E9A3;
+        }
+
+        footer {
+            background-color: #000000;
+            color: #B7B7B7;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .menu {
+            display: none;
+        }
+
+
+        header h2 {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .news h4 {
+            font-size: 30px;
+        }
+
+        .news img {
+            width: 15%;
+            margin-right: 15px; /* Space between the image and the text */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu {
+            display: block;
+            background-color: transparent;
+            color: white;
+            font-size: 35px;
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .shop {
+            flex-direction: column;
+        }
+
+            .shop img {
+                width: 65%;
+                position: center
+            }
+
+        .info {
+            width: 100%;
+            padding: 40px 0;
+        }
+
+
+        .info {
+            display: flex;
+            align-items: center; /* Vertically center the content */
+        }
+
+            .info img {
+                margin-right: 15px; /* Space between image and text */
+            }
+
+            .info h2 {
+                font-size: 25px;
+                text-align: right; /* Align text to the right */
+            }
+
+            .info p {
+                margin: 150px 0 0 0; /* Top margin of 20px */
+            }
+
+       /*  .product {
+            flex-direction: column;
+            padding: 60px 0;
+        }
+
+            .product div {
+                margin-bottom: 30px;
+            }
+
+        } */
+
+
+
+        .carousel {
+            position: relative;
+            width: 80%;
+            max-width: 600px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+
+            .carousel-item img {
+                width: 100%;
+                height: auto;
+                display: block;
+            }
+
+
+
+        #carouselExampleIndicators {
+            width: 60%; /* 你可以調整這個比例 */
+            max-width: 600px; /* 設定最大寬度 */
+            margin: auto; /* 讓Carousel水平置中 */
+        }
+
+            #carouselExampleIndicators .carousel-item img {
+                width: 100%;
+                height: 100%; /* 確保圖片的高度與容器一致 */
+                object-fit: cover; /* 讓圖片覆蓋整個容器 */
+            }
+
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px; /* 间距 */
+        }
+
+        .item {
+            flex: 1 1 calc(33.333% - 20px); /* 每行三个，减去间距 */
+            box-sizing: border-box;
+            padding: 10px;
+            border: 1px solid #ddd; /* 边框 */
+            border-radius: 8px; /* 圆角 */
+            background: #f9f9f9; /* 背景颜色 */
+        }
+
+            .item img {
+                max-width: 100%;
+                height: auto;
+                display: block;
+                margin-bottom: 10px;
+            }
+
+            .item h3 {
+                margin: 0 0 10px;
+                font-size: 1.2em;
+            }
+
+            .item p {
+                margin: 0 0 10px;
+                font-size: 1em;
+            }
+
+            .item button {
+                display: inline-block;
+                padding: 10px 20px;
+                font-size: 1em;
+                color: #fff;
+                background-color: #007bff;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+                .item button:hover {
+                    background-color: #0056b3;
+                }
+
+        #footer {
+            background-color: #000; /* 黑色背景 */
+            color: #fff; /* 白色文字 */
+            padding: 10px; /* 內邊距 */
+            text-align: center; /* 文字置中 */
+            font-size: 14px; /* 字體大小 */
+            border-top: 1px solid #444; /* 上邊框 */
+        }
+
+            #footer a {
+                color: yellowgreen; /* 超連結文字顏色 */
+                text-decoration: none; /* 去除下劃線 */
+            }
+
+                #footer a:hover {
+                    text-decoration: underline; /* 滑鼠懸停時顯示下劃線 */
+                }
+
+
+
+
+    .search-form input[type="text"] {
+    padding: 10px 15px;
+    border: 2px solid #007bff;
+    border-radius: 20px;
+    margin-right: 10px;
+    width: 100px; /* 調整搜尋框寬度 */
+    outline: none;
+    transition: border-color 0.3s;
+        }
+
+
+        .search-form input[type="text"]::placeholder {
+      color: #888; /* 佔位符的顏色 */
+        }
+
+.search-form input[type="text"]:focus {
+    border-color: #0056b3; /* 獲得焦點時的邊框顏色 */
+}
+
+.search-form button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.search-form button:hover {
+    background-color: #0056b3;
+}
+
+.search-form button:focus {
+    outline: none;
+}
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 4px solid  lightgray;
+            padding: 8px;
+        }
+
+        th {
+            background-color: lightgoldenrodyellow;
+        }
+
+        tr:nth-child(even) {
+            background-color: lightgoldenrodyellow;
+        }
+
+        
+    </style>
+
+    <style>
+
+
+        .mapcontainer {
+            background-color: antiquewhite;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 20px auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .text-section, .map-section {
+            flex: 1;
+            margin: 10px;
+        }
+
+        .text-section {
+            max-width: 50%;
+        }
+
+            .text-section h2 {
+                color: #333;
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+
+            .text-section p {
+                font-size: 18px;
+                color: #555;
+                margin: 5px 0;
+            }
+
+        .map-section {
+            max-width: 70%;
+        }
+
+            .map-section iframe {
+                width: 100%;
+                height: 300px;
+                border: 0;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <header>
+        @*   <button class="menu">菜單</button>
+        <h1>天天都是喝好湯的日子</h1> *@
+        <nav class="banner">
+            <ul> 
+                </li>
+                <li><a href="http://localhost:5230/MainPage/Create">首頁</a></li>
+                <li><a href="http://localhost:5230/About/Index">認識我們</a></li>
+                <li><a href="http://localhost:5230/Overview/Index">商品總覽</a></li>
+                <li><a href="http://localhost:5230/cartindex.html">🛒購物車🛒</a></li>
+                <li><a href="http://localhost:5230/PostBooks">顧客留言區</a></li>
+                <li><a href="http://localhost:5230/Members/Login">會員登入</a></li>
+                <li><a href="http://localhost:5230/Admins/Login">管理員登入</a></li>
+                <li class="search-form" action="/search" method="GET">
+                    <input type="text" name="query" placeholder="🔍Search..." required>
+                    <button type="submit">搜尋</button>
+                </li>
+            </ul>
+           
+        </nav>
+    </header>
+    <br>
+    <br>
+    <br>
+    
+    <main>
+
+        <section class="news">
+            <br>
+            <br>
+            
+            <img src="~/lib/SeedSourcePhoto/1.JPG" alt="專業相伴">
+            <h4>月月湯湯—湯品專賣舖核心價值</h4>
+            <h4>細語微風，天天都是喝好湯的日子</h4>
+
+            @* <h1>天氣預報</h1>
+            <table id="weatherTable">
+                <thead>
+                    <tr>
+                        <th>高雄市降雨時間範圍</th>
+                        <th>高雄市降雨機率 (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 天氣數據將顯示在這裡 -->
+                </tbody>
+            </table>
+            
+                <p>無法動態抓取氣象顯示</p> *@
+
+            <div id="container" class="container">
+            </div>
+
+
+            @* <div class="weather">
+                <h4>台灣天氣概況</h4>
+                @if (ViewBag.WeatherData != null)
+                {
+                    var weather = (dynamic)ViewBag.WeatherData;
+                    if (weather.Error != null)
+                    {
+                        <p>@weather.Error</p>
+                    }
+                    else
+                    {
+                        <p>@weather.LocationName</p>
+                        <p>天氣概況：@weather.Description</p>
+                        <p>最高氣溫：@weather.MaxTemp°C</p>
+                        <p>最低氣溫：@weather.MinTemp°C</p>
+                    }
+                }
+                else
+                {
+                    <p>無法動態獲取天氣數據並顯示。</p>
+                }
+            </div> *@
+
+       
+        </section>
+
+        @* //------------------------------------ *@
+     @*    @if (Model == null || !Model.Any())
+        {
+            <p>No images found.</p>
+        }
+        else
+        { *@
+
+            
+@* 
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel"> *@
+                @* <div class="carousel-indicators">
+                    @for (int j = 1; j <=9 ; j++)
+                    {
+                        a = j == 1 ? "active" : "";
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@j" class="@a" aria-current="true" aria-label="Slide @j"></button>
+                    }
+                </div> *@
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        @for (int j = 20; j < 29; j++)
+                        {
+
+                    a = j == 0 ? "active" : "";
+
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@j" class="@a" aria-current="true" aria-label="Slide 1"></button>
+                        }
+                    </div>
+                    <div class="carousel-inner">
+
+                        @for (var i = 20; i <= 29; i++)
+                        {
+                            a = i == 0 ? "active" : "";
+
+                    <div class="carousel-item @a" data-bs-interval="500">
+                                <img src=/lib/SeedSourcePhoto/@(i).JPG class="d-block w-100" alt="..."> 
+                            </div>
+                            i++;
+                        }
+                    </div>
+          @*   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+               
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              
+            </button> *@
+                </div>
+            </div>
+       
+                    
+                    
+
+                    @* ///----------------------- *@
+
+
+                   
+
+
+
+
+                 <section class="slogan">
+                <blockquote>" 嚴選食材，精湛手藝，<br>讓快樂在每一口蔓延 "</blockquote>
+                </section>
+
+                <section class="shop">
+
+                <div class="info">
+                <h2>
+                 <img src="~/lib/SeedSourcePhoto/9.JPG" alt="專業相伴">
+                <p>職人精神，工匠手藝<br>
+                等你一起來！</p>
+                </div>
+                </section>
+
+                <section class="product">
+            <div class="container">
+                <div id="item1" class="item">
+                    <img src="~/lib/SeedSourcePhoto/2.JPG" alt="Just">
+                    <h3>好湯一再推薦，經典之選<br>——番茄紅酒燉牛肉湯</h3>
+                    <p>紅酒的醇厚，牛肉香氣嫩滑<br>享受時刻</p>
+                    <a href="http://localhost:5230/Carts/Create">
+                        <button>直接下單</button></a>
+                    <h2>定價<br>200元/400ml<br>
+                        580元/1200ml</h2>
+                </div>
+                <div id="item2" class="item">
+                    <img src="~/lib/SeedSourcePhoto/3.JPG" alt="555">
+                    <h3>日日配方x滋補佳品<br>——柑橘蔥雞湯</h3>
+                    <p>滋補與美味的完美結合<br>日日爆單</p>
+
+                    <a href="http://localhost:5230/Carts/Create">
+                        <button>直接下單</button>
+                    </a>
+                    <h2>
+                        定價<br>160元/400ml<br>
+                        460元/1200ml
+                    </h2>
+                </div>
+                <div id="item3" class="item">
+                    <img src="~/lib/SeedSourcePhoto/4.JPG" alt="奧妙">
+                    <h3>梅香辣味，滋補鮮湯<br>——梅子剝皮辣椒雞湯</h3>
+                    <p>創意的奧妙<br>意想不到的層次，讓美味與健康同行</p>
+                    <a href="http://localhost:5230/Carts/Create">
+                        <button>直接下單</button>
+                    </a>
+                    <h2>
+                        定價<br>170元/400ml<br>
+                        490元/1200ml
+                    </h2>
+                </div>
+                <div id="item4" class="item">
+                    <img src="~/lib/SeedSourcePhoto/6.JPG" alt="奧妙">
+                    <h3>清新開胃，獨特風味<br>——酸白菜椰奶疏時湯</h3>
+                    <p>爽口與椰奶的絲滑相得益彰<br>清新滋味，完美結合</p>
+                    <a href="http://localhost:5230/Carts/Create">
+                        <button>直接下單</button>
+                    </a>
+                    <h2>
+                        定價<br>155元/400ml<br>
+                        445元/1200ml
+                    </h2>
+                </div>
+                <div id="item5" class="item">
+                    <img src="~/lib/SeedSourcePhoto/7.JPG" alt="奧妙">
+                    <h3>融合風味，甜蜜新體驗<br>——馬告可可芋泥甜湯</h3>
+                    <p>細膩的芋泥<br>融合經典與創新</p>
+                    <a href="http://localhost:5230/Carts/Create">
+                        <button>直接下單</button>
+                    </a>
+                    <h2>定價<br>200元/400ml</h2>
+              </div>
+                <div id="item7" class="item">
+                    <img src="~/lib/SeedSourcePhoto/99.JPG" alt="奧妙">
+                    <h3>地瓜軟糯x腰果香脆<br>——地瓜腰果濃湯佐鳳梨</h3>
+                    <p>酸甜與濃郁絕妙搭配<br>每一口的幸福滋味</p>
+                    <a href="http://localhost:5230/Carts/Create">
+                        <button>直接下單</button>
+                    </a>
+                    <h2>定價<br>200元/400ml</h2>
+            
+                </div>
+                    </section>
+
+        <div class="mapcontainer">
+            <div class="text-section">
+                <h2>聯絡我們</h2>
+                <p>郵遞區號: 806027</p>
+                <p>地址: 高雄市前鎮區凱旋四路105號</p>
+                <p>
+                    門市時間：11:30 - 22:00（週一~週日）<br>聯絡我們：
+                
+                    <br><a href="https://www.facebook.com/profile.php?id=100090325010334">
+                        <img src="~/lib/IPhoto/13.png" alt="Just" style="width: 10%; height: auto;">
+                    </a>
+                    <a href="https://liff.line.me/1645278921-kWRPP32q/?accountId=545kkctg">
+                        <img src="~/lib/IPhoto/14.png" alt="Just" style="width: 10%; height: auto;">
+                    </a>
+                   
+                    <br>食品登錄字號：B-183299619-00000-6
+                    <br>產品責任險號：1740110ML000058
+                    <br>（新安東京海上產物保險）
+                    <br> 客  服  信  箱：monhtly@gmail.com
+                </p>
+            </div>
+
+            <div class="map-section">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.61805320588!2d120.30861815767216!3d22.59338430000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e0372ac39bd97%3A0xb6cc64aa22ddfbe!2z5Yue5YuV6YOo5Yue5YuV5Yqb55m85bGV572y6auY5bGP5r6O5p2x5YiG572y!5e0!3m2!1szh-TW!2stw!4v1724498809209!5m2!1szh-TW!2stw" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+                    <section class="newsletter">
+                        <p>歡迎訂閱月月湯湯電子報，可不定期收到限定優惠喔！</p>
+                        <form>
+                            <input type="email" placeholder="請輸入您的 Email" required>
+                            <button type="submit">送出</button>
+                        </form>
+                    </section>
+        </main>
+    <div id="footer">
+        Copyright &copy; @DateTime.Now.Year - 月月湯湯—湯品專賣舖 - <a asp-area="" asp-controller="Home" asp-action="Privacy">本站隱私權政策</a> | 最後更新時間: @DateTime.Now
+    </div>
+
+        <script>
+
+
+            var imageUrls = [
+                @string.Join(", ", imageUrls.Select(url => $"'{url}'"))
+                                                                ];
+
+            console.log('Image URLs:', imageUrls); // 调试：检查生成的图片路径
+
+            function generateCarouselItems() {
+                const container = document.getElementById('carousel-inner');
+                imageUrls.forEach((url, index) => {
+                    const item = document.createElement('div');
+                    item.classList.add('carousel-item');
+                    item.innerHTML = `<img src="${url}" alt="Image ${index + 1}">`;
+                    container.appendChild(item);
+                });
+            }
+
+            // 初始化轮播
+            let currentIndex = 0;
+
+            function showSlide(index) {
+                const slides = document.querySelectorAll('.carousel-item');
+                if (index >= slides.length) {
+                    currentIndex = 0;
+                } else if (index < 0) {
+                    currentIndex = slides.length - 1;
+                } else {
+                    currentIndex = index;
+                }
+
+                const offset = -currentIndex * 100;
+                document.querySelector('.carousel-inner').style.transform = `translateX(${offset}%)`;
+            }
+
+            function nextSlide() {
+                showSlide(currentIndex + 1);
+            }
+
+            function prevSlide() {
+                showSlide(currentIndex - 1);
+            }
+
+            // 自动切换幻灯片
+            setInterval(nextSlide, 3000); // 每3秒切换一次
+
+            // 执行生成轮播项
+            generateCarouselItems();
+
+
+            //-----------------------------------------------
+            function order() {
+                alert("感謝您的訂購！");
+                // 可以在這裡添加 AJAX 請求或其他操作
+
+            }
+
+        </script>
+@*    <script>
+    // 確保網頁完全加載後再執行腳本
+    document.addEventListener("DOMContentLoaded", function() {
+    // JSON 數據
+    const weatherData = {
+    "success": "true",
+    "result": {
+    "resource_id": "F-C0032-001",
+    "fields": [
+    { "id": "datasetDescription", "type": "String" },
+    { "id": "locationName", "type": "String" },
+    { "id": "parameterName", "type": "String" },
+    { "id": "parameterValue", "type": "String" },
+    { "id": "parameterUnit", "type": "String" },
+    { "id": "startTime", "type": "Timestamp" },
+    { "id": "endTime", "type": "Timestamp" }
+    ]
+    },
+    "records": {
+    "datasetDescription": "三十六小時天氣預報",
+    "location": [
+    {
+    "locationName": "高雄市",
+    "weatherElement": [
+    {
+    "elementName": "PoP",
+    "time": [
+    {
+    "startTime": "2024-08-19 18:00:00",
+    "endTime": "2024-08-20 06:00:00",
+    "parameter": {
+    "parameterName": "90",
+    "parameterUnit": "百分比"
+    }
+    },
+    {
+    "startTime": "2024-08-20 06:00:00",
+    "endTime": "2024-08-20 18:00:00",
+    "parameter": {
+    "parameterName": "70",
+    "parameterUnit": "百分比"
+    }
+    },
+    {
+    "startTime": "2024-08-20 18:00:00",
+    "endTime": "2024-08-21 06:00:00",
+    "parameter": {
+    "parameterName": "30",
+    "parameterUnit": "百分比"
+    }
+    }
+    ]
+    }
+    ]
+    }
+    ]
+    }
+    };
+
+    // 取得表格的 tbody 元素
+    const tbody = document.querySelector('#weatherTable tbody');
+
+    // 處理 JSON 數據
+    const location = weatherData.records.location[0];
+    const weatherElement = location.weatherElement[0];
+    const timeData = weatherElement.time;
+
+    // 確保數據存在
+    if (timeData && timeData.length > 0) {
+    timeData.forEach(item => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+    <td>${item.startTime} 至 ${item.endTime}</td>
+    <td>${item.parameter.parameterName} ${item.parameter.parameterUnit}</td>
+    `;
+    tbody.appendChild(row);
+    });
+    } else {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+    <td colspan="2">沒有數據可顯示</td>
+    `;
+    tbody.appendChild(row);
+    }
+    });
+        // https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-D0047-067?Authorization=CWA-F689F2CB-B051-48FE-BF21-46C76136FEF5&limit=1&offset=1
+
+    </script> *@
+
+
+
+    <script>
+
+      
+                const jsonData = {
+            "locationName": "前鎮區",
+            "geocode": "64000090",
+            "lat": "22.588331",
+            "lon": "120.310239",
+            "weatherElement": [
+                {
+                    "elementName": "WeatherDescription",
+                    "description": "天氣預報綜合描述",
+                    "time": [
+                        {
+                            "startTime": "2024-09-19 06:00:00",
+                            "endTime": "2024-09-19 18:00:00",
+                            "elementValue": [
+                                {
+                                    "value": "晴時多雲。降雨機率 10%。溫度攝氏27至30度。舒適至悶熱。偏北風 風速<= 1級(每秒1公尺)。相對濕度82%。",
+                                    "measures": "NA"
+                                }
+                            ]
+                        },
+                        {
+                            "startTime": "2024-09-20 06:00:00",
+                            "endTime": "2024-09 -20 18:00:00",
+                            "elementValue": [
+                                {
+                                    "value": "多雲時晴。溫度攝氏27至32度。舒適至悶熱。西北風 風速2級(每秒2公尺)。相對濕度79%。",
+                                    "measures": "NA"
+                                }
+                            ]
+                        },
+                        {
+                            "startTime": "2024-09 -21 18:00:00",
+                            "endTime": "2024-09 -21 06:00:00",
+                            "elementValue": [
+                                {
+                                    "value": "多雲時晴。溫度攝氏26至29度。舒適至悶熱。東北風 風速<= 1級(每秒1公尺)。相對濕度88%。",
+                                    "measures": "NA"
+                                }
+                            ]
+                        }
+                        // 继续添加其他时间段
+
+                    ]
+                }
+            ]
+        };
+
+        // 创建表格结构
+        let myTable = `
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>地點</th>
+                                <th>時間區段</th>
+                                <th>天氣描述，請小心前往本店💞💞</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+
+        // 遍历天气描述数据
+        jsonData.weatherElement.forEach(element => {
+            element.time.forEach(period => {
+                period.elementValue.forEach(value => {
+                    myTable += `
+                                <tr>
+                                    <td>${jsonData.locationName}</td>
+                                    <td>${period.startTime} - ${period.endTime}</td>
+                                    <td>${value.value}</td>
+                                </tr>
+                            `;
+                });
+            });
+        });
+
+        myTable += `</tbody></table>`;
+
+        // 将表格插入到页面
+        document.getElementById('container').innerHTML = myTable;
+        </script>
+</body>
+</html>
+   
+
