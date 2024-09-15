@@ -1,0 +1,478 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>月月湯湯線上購</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        header {
+            background-color: rgba(35,28,26,0.8);
+            height: 80px;
+            width: 93%;
+            position: fixed;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            z-index: 1000;
+        }
+
+        h1 {
+            color: white;
+            position: absolute;
+            left: 120px;
+            top: 0;
+            line-height: 80px;
+            background-image: url(images/logo.svg);
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 210px;
+            text-indent: -9999px;
+            font-size: 5rem;
+        }
+
+        header ul {
+            position: absolute;
+            right: 5vw;
+            top: 0;
+            line-height: 80px;
+            z-index: 1000;
+        }
+
+        header li {
+            display: inline;
+            margin-right: 4vw;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+        }
+
+            header a:hover {
+                text-decoration: underline;
+            }
+
+        #menu {
+            width: 250px;
+            background-color: #333;
+            color: white;
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100%;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            padding: 20px;
+            z-index: 1000;
+        }
+
+            #menu a {
+                color: white;
+                text-decoration: none;
+                display: block;
+                padding: 10px;
+                font-size: 18px;
+            }
+
+                #menu a:hover {
+                    background-color: #575757;
+                }
+
+        #menuButton {
+            position: fixed;
+            left: 20px;
+            top: 0px;
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 0px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1001;
+            font-size:50px;
+        }
+
+        #menu.show {
+            transform: translateX(0);
+        }
+
+        .news {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px;
+        }
+
+            .news h1 {
+                font-size: 70px;
+            }
+
+            .news img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 8px;
+            }
+
+        #message {
+            width: 100%;
+            text-align: center;
+            font-weight: bold;
+            background-color: antiquewhite;
+            padding: 5px;
+            font-size: 2rem;
+        }
+
+        .link-image img {
+            width: 200px;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+            .link-image img:hover {
+                transform: scale(1.05);
+            }
+
+        #calendar {
+            width: 500px;
+            border: 0px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #fff;
+            transform: scale(0.8);
+            transform-origin: top left;
+            margin: 0 auto;
+            display: block;
+        }
+
+        #cheader {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2px;
+            background-color: #f5f5f5;
+            border-bottom: 1px solid #ccc;
+        }
+
+            #cheader button {
+                background: none;
+                border: none;
+                font-size: 16px;
+                cursor: pointer;
+            }
+
+        #monthYear {
+            font-weight: bold;
+        }
+
+        #daysOfWeek,
+        #days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+        }
+
+            #daysOfWeek div,
+            #days div {
+                text-align: center;
+                padding: 1px;
+                font-size: 15px;
+            }
+
+            #days div {
+                font-size: 20px;
+                border: 1px solid #eee;
+                height: 50px;
+                box-sizing: border-box;
+            }
+
+        .today {
+            background-color: rgb(206, 118, 118);
+            color: #fff;
+            border-radius: 20%;
+        }
+
+
+
+        #title {
+            background-color: yellow; /* 设置背景颜色 */
+            border-radius: 8px; /* 圆角边框 */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+            padding: 20px; /* 内边距 */
+            max-width: 800px; /* 最大宽度 */
+            margin: 0 auto; /* 居中对齐 */
+            text-align: center; /* 文本居中对齐 */
+            font-size: 35px; /* 字体大小 */
+            color: red; /* 文本颜色 */
+            font-family: 'Arial', sans-serif; /* 字体 */
+            font-weight: bold; /* 加粗字体 */
+            border: 2px solid #ccc; /* 边框 */
+            transition: background-color 0.3s ease; /* 背景颜色渐变过渡效果 */
+        }
+
+            /* 鼠标悬停时的效果 */
+            #title:hover {
+                background-color: #ffeb3b; /* 更亮的背景色 */
+            }
+
+        /* 容器样式 */
+        #apiDataContainer {
+            background:yellow;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align:center;
+        }
+
+        /* 每个项目的样式 */
+        .api-item {
+            background:green;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        /* 错误提示的样式 */
+        .error-message {
+            color: #d9534f;
+            background: #f9d6d5;
+            border: 1px solid #d9534f;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+    </style>
+
+</head>
+<body>
+    <header>
+        <nav class="banner">
+            <ul>
+                <li><a href="http://localhost:5230/MainPage/Create">登出</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <button id="menuButton">☰ </button>
+
+    <div id="menu">
+        <br>
+         <br>
+        <a href="http://localhost:5230/ProcurmentSheets/Index">入庫記錄查詢</a>
+        <a href="http://localhost:5230/Stocksheets/Index">出庫記錄查詢</a>
+        <a href="http://localhost:5230/Members/Index">會員管理</a>
+        <a href="http://localhost:5230/Admins/Index">員工管理</a>
+        <a href="http://localhost:5230/SysAdmins/Index">聯絡我們</a>
+        <a href="http://localhost:5230/Products/Index">產品管理</a>
+        <a href="http://localhost:5230/Orders/Index">訂單明細管理</a>
+        <a href="http://localhost:5230/Suppliers/Index">供應商管理</a>
+        <a href="http://localhost:5230/Categories/Index">商品種類維護</a>
+        <a href="http://localhost:5230/Carts/Index">客戶直接下單紀錄</a>
+    </div>
+
+    <div id="message">
+        <br><br>🐽管理者介面後台𓃠<br>🐱點擊以下介面𓃟<br>
+    </div>
+    <br>
+    <div id="title">
+        本日公事發給，定日更新
+        <br>(外接自製api資源跨域)
+    </div>
+    <div id="apiDataContainer">
+        <div>本日公事發給(外接api資源)</div>
+        <!-- API 數據將顯示在這裡 -->
+    </div>
+    <div class="link-image" style="text-align: center; margin-top: 100px;">
+        <a href="http://localhost:5230/ProcurmentSheets/Index">
+            <img src="~/lib/IPhoto/1.JPG" alt="Just">
+        </a>
+        <a href="http://localhost:5230/Stocksheets/Index">
+            <img src="~/lib/IPhoto/2.JPG" alt="Just">
+        </a>
+        <a href="http://localhost:5230/Members/Index">
+            <img src="~/lib/IPhoto/3.JPG" alt="Just">
+        </a>
+        <a href="http://localhost:5230/Admins/Index">
+            <img src="~/lib/IPhoto/4.JPG" alt="Just">
+        </a>
+        <a href="http://localhost:5230/SysAdmins/Index">
+            <img src="~/lib/IPhoto/12.JPG" alt="Just">
+        </a>
+        <br>
+        <a href="http://localhost:5230/Products/Index">
+            <img src="~/lib/IPhoto/5.JPG" alt="Just">
+        </a>
+        <a href="http://localhost:5230/Orders/Index">
+            <img src="~/lib/IPhoto/6.JPG" alt="Just">
+        </a>
+        <a href="http://localhost:5230/Suppliers/Index">
+            <img src="~/lib/IPhoto/7.JPG" alt="Just">
+        </a>
+        <a href="http://localhost:5230/Categories/Index">
+            <img src="~/lib/IPhoto/8.JPG" alt="Just">
+        </a>
+        <a href="http://localhost:5230/Carts/Index">
+            <img src="~/lib/IPhoto/15.JPG" alt="Just">
+        </a>
+
+        <a href="http://localhost:5230/Books/Index">
+            <img src="~/lib/IPhoto/14.JPG" alt="Just">
+        </a>
+
+        <br><br>
+        <div id="calendar">
+            <div id="cheader">
+                <button id="prevMonth">&lt;</button>
+                <span id="monthYear"></span>
+                <button id="nextMonth">&gt;</button>
+            </div>
+            <div id="daysOfWeek">
+                <div>Sun</div>
+                <div>Mon</div>
+                <div>Tue</div>
+                <div>Wed</div>
+                <div>Thu</div>
+                <div>Fri</div>
+                <div>Sat</div>
+            </div>
+            <div id="days"></div>
+        </div>
+    </div>
+    <p style="font-size: 60px; padding: 10px; text-align: center;">
+        不要做薪水小偷!!
+    </p>
+
+
+        
+
+    </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const daysContainer = document.getElementById('days');
+        const monthYearDisplay = document.getElementById('monthYear');
+        const prevMonthBtn = document.getElementById('prevMonth');
+        const nextMonthBtn = document.getElementById('nextMonth');
+        const menuButton = document.getElementById('menuButton');
+        const menu = document.getElementById('menu');
+
+        let currentDate = new Date();
+        const today = new Date();
+
+        function updateCalendar() {
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+
+            const firstDayOfMonth = new Date(year, month, 1);
+            const lastDayOfMonth = new Date(year, month + 1, 0);
+
+            daysContainer.innerHTML = '';
+            monthYearDisplay.textContent = `${currentDate.toLocaleString('default', { month: 'long' })} ${year}`;
+
+            for (let i = 0; i < firstDayOfMonth.getDay(); i++) {
+                daysContainer.innerHTML += '<div></div>';
+            }
+
+            for (let day = 1; day <= lastDayOfMonth.getDate(); day++) {
+                const cell = document.createElement('div');
+                cell.textContent = day;
+
+                if (
+                    day === today.getDate() &&
+                    month === today.getMonth() &&
+                    year === today.getFullYear()
+                ) {
+                    cell.classList.add('today');
+                }
+
+                daysContainer.appendChild(cell);
+            }
+        }
+
+        prevMonthBtn.addEventListener('click', function () {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            updateCalendar();
+        });
+
+        nextMonthBtn.addEventListener('click', function () {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            updateCalendar();
+        });
+
+        menuButton.addEventListener('click', function () {
+            menu.classList.toggle('show');
+        });
+
+        updateCalendar();
+    });
+</script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const apiDataContainer = document.getElementById('apiDataContainer');
+
+        // 發送 GET 請求到你的 ASP.NET Core API
+        fetch('http://localhost:5161/apiCategories') // 替換為你的 API URL
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+               
+                var temp = ""
+                data.forEach(function (item) {
+                    temp += "<div>" + item.catName+ "</div>"
+                });
+                $("#apiDataContainer").html(temp)
+                // 這裡的 data 是 API 返回的數據
+                // apiDataContainer.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                apiDataContainer.innerHTML = '<p>Error fetching data</p>';
+            });
+    });
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const apiDataContainer = document.getElementById('apiDataContainer');
+
+        // 发送 GET 请求到你的 ASP.NET Core API
+        fetch('http://localhost:5161/api/Categories') // 替换为你的 API URL
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.length === 0) {
+                    apiDataContainer.innerHTML = '<p>No data available.</p>';
+                    return;
+                }
+
+                const itemsHtml = data.map(item => `
+                            <div class="api-item">${item.catName}</div>
+                        `).join('');
+
+                apiDataContainer.innerHTML = itemsHtml;
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                apiDataContainer.innerHTML = '<p class="error-message">Error fetching data. Please try again later.</p>';
+            });
+    });
+</script>
+
+</html>
