@@ -1,0 +1,54 @@
+﻿@model IEnumerable<D05Project.Models.PurchaseRecord>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "Overview";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pIdNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.sIdNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.sNoNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pIdNavigation.pId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sIdNavigation.sId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sNoNavigation.sNo)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
