@@ -1,0 +1,492 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  
+</head>
+<body class="">
+
+    <div class="container">
+        <header>
+            <div class="title">購物車預定</div>
+           
+                <div class="step-indicator">
+                    <div class="step active">
+                        <div class="step-number">01</div>
+                        <div class="step-label">填寫購物清單</div>
+                    </div>
+                    <div class="step ">
+                        <div class="step-number">02</div>
+                        <div class="step-label">填寫資料</div>
+                    </div>
+                    <div class="step ">
+                        <div class="step-number">03</div>
+                        <div class="step-label">完成訂單</div>
+                    </div>
+                </div>
+                <div class="icon-cart">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 15a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0h8m-8 0-1-4m9 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-9-4h10l2-7H3m2 7L3 4m0 0-.792-3H1" />
+                    </svg>
+                    <span>0</span>
+                </div>
+        </header>
+        <div class="listProduct">
+
+        </div>
+    </div>
+    <div class="cartTab">
+        <h1>購物車清單</h1>
+        <div class="listCart">
+
+        </div>
+        <div class="btn">
+            <button onclick="window.location.href='http://localhost:5230/MainPage/Create';">回首頁</button>
+            <button class="checkOut" id="checkOutButton" >去結帳</button>
+
+        </div>
+
+        <div class="listProduct">
+            <!-- Products will be added here dynamically -->
+        </div>
+
+        <!--<script src="app.js"></script>-->
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const iconCart = document.querySelector('.icon-cart');
+                const body = document.querySelector('body');
+
+                iconCart.addEventListener('click', () => {
+                    body.classList.toggle('showCart');
+                });
+            });
+
+        </script>
+
+
+        <script>
+
+            const products = [
+                { "id": 1, "name": "紅酒燉牛肉湯", "price": 200, "image": "/lib/SeedSourcePhoto/2.JPG" },
+                { "id": 2, "name": "柑橘蔥雞湯", "price": 200, "image": "/lib/SeedSourcePhoto/3.JPG" },
+                { "id": 3, "name": "剝皮辣椒梅子雞湯", "price": 200, "image": "/lib/SeedSourcePhoto/4.JPG" },
+                { "id": 4, "name": "酸白菜椰奶雞湯", "price": 200, "image": "/lib/SeedSourcePhoto/6.JPG" },
+                { "id": 5, "name": "馬告可可芋泥甜湯", "price": 100, "image": "/lib/SeedSourcePhoto/7.JPG" },
+                { "id": 6, "name": "腰果地瓜濃湯佐鳳梨", "price": 200, "image": "/lib/SeedSourcePhoto/99.JPG" }
+                //{ "id": 7, "name": "LD07 LOUNGE CHAIR", "price": 200, "image": "/lib/SeedSourcePhoto/99.JPG" },
+                //{ "id": 8, "name": "LD08 LOUNGE CHAIR", "price": 200, "image": "/lib/SeedSourcePhoto/99.JPG" }
+            ];
+
+            const listProductHTML = document.querySelector('.listProduct');
+            const listCartHTML = document.querySelector('.listCart');
+            const iconCartSpan = document.querySelector('.icon-cart span');
+            let cart = [];
+
+            // Function to display products
+            const addDataToHTML = () => {
+                listProductHTML.innerHTML = '';
+                products.forEach(product => {
+                    let newProduct = document.createElement('div');
+                    newProduct.dataset.id = product.id;
+                    newProduct.classList.add('item');
+                    newProduct.innerHTML = `
+                                    <img src="${product.image}" alt="${product.name}">
+                                    <h2>${product.name}</h2>
+                                    <div class="price">$${product.price}</div>
+                                    <button class="addCart">Add To Cart</button>`;
+                    listProductHTML.appendChild(newProduct);
+                });
+            };
+
+            // Function to add product to the cart
+            const addToCart = (product_id) => {
+                let productInCart = cart.find(item => item.product_id == product_id);
+                if (productInCart) {
+                    productInCart.quantity++;
+                } else {
+                    cart.push({ product_id: product_id, quantity: 1 });
+                }
+                updateCart();
+            };
+
+            // Function to update the cart display and local storage
+            const updateCart = () => {
+                listCartHTML.innerHTML = '';
+                let totalQuantity = 0;
+                cart.forEach(item => {
+                    let product = products.find(p => p.id == item.product_id);
+                    if (product) {
+                        totalQuantity += item.quantity;
+                        let cartItem = document.createElement('div');
+                        cartItem.classList.add('item');
+                        cartItem.dataset.id = item.product_id;
+                        cartItem.innerHTML = `
+                                        <div class="image"><img src="${product.image}" alt="${product.name}"></div>
+                                        <div class="name">${product.name}</div>
+                                        <div class="totalPrice">$${product.price * item.quantity}</div>
+                                        <div class="quantity">
+                                            <span class="minus">-</span>
+                                            <span>${item.quantity}</span>
+                                            <span class="plus">+</span>
+                                        </div>`;
+                        listCartHTML.appendChild(cartItem);
+                    }
+                });
+                iconCartSpan.innerText = totalQuantity;
+                localStorage.setItem('cart', JSON.stringify(cart));
+            };
+
+            // Event listener for the product list
+            listProductHTML.addEventListener('click', (event) => {
+                if (event.target.classList.contains('addCart')) {
+                    let product_id = event.target.parentElement.dataset.id;
+                    addToCart(product_id);
+                }
+            });
+
+            // Event listener for the cart
+            listCartHTML.addEventListener('click', (event) => {
+                if (event.target.classList.contains('minus') || event.target.classList.contains('plus')) {
+                    let product_id = event.target.parentElement.parentElement.dataset.id;
+                    let action = event.target.classList.contains('plus') ? 'plus' : 'minus';
+                    changeQuantity(product_id, action);
+                }
+            });
+
+            // Function to change quantity in the cart
+            const changeQuantity = (product_id, action) => {
+                let item = cart.find(i => i.product_id == product_id);
+                if (item) {
+                    if (action === 'plus') {
+                        item.quantity++;
+                    } else if (action === 'minus') {
+                        item.quantity--;
+                        if (item.quantity <= 0) {
+                            cart = cart.filter(i => i.product_id != product_id);
+                        }
+                    }
+                    updateCart();
+                }
+            };
+
+            // Initialize the application
+            const initApp = () => {
+                addDataToHTML();
+                if (localStorage.getItem('cart')) {
+                    cart = JSON.parse(localStorage.getItem('cart'));
+                    updateCart();
+                }
+            };
+            initApp();
+
+        </script>
+
+        <script src='//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js'></script>
+        <script>
+            //let listProductHTML = document.querySelector('.listProduct');
+            let listCartHTML = document.querySelector('.listCart');
+            let iconCart = document.querySelector('.icon-cart');
+            let iconCartSpan = document.querySelector('.icon-cart span');
+            let body = document.querySelector('body');
+            let closeCart = document.querySelector('.close');
+            let products = [];
+            let cart = [];
+
+
+            iconCart.addEventListener('click', () => {
+                body.classList.toggle('showCart');
+            })
+            closeCart.addEventListener('click', () => {
+                body.classList.toggle('showCart');
+            })
+
+            const addDataToHTML = () => {
+                // remove datas default from HTML
+
+                // add new datas
+                if (products.length > 0) // if has data
+                {
+                    products.forEach(product => {
+                        let newProduct = document.createElement('div');
+                        newProduct.dataset.id = product.id;
+                        newProduct.classList.add('item');
+                        newProduct.innerHTML =
+                            `<img src="${product.image}" alt="">
+                                        <h2>${product.name}</h2>
+                                        <div class="price">$${product.price}</div>
+                                        <button class="addCart">Add To Cart</button>`;
+                        listProductHTML.appendChild(newProduct);
+                    });
+                }
+            }
+            listProductHTML.addEventListener('click', (event) => {
+                let positionClick = event.target;
+                if (positionClick.classList.contains('addCart')) {
+                    let id_product = positionClick.parentElement.dataset.id;
+                    addToCart(id_product);
+                }
+            })
+            const addToCart = (product_id) => {
+                let positionThisProductInCart = cart.findIndex((value) => value.product_id == product_id);
+                if (cart.length <= 0) {
+                    cart = [{
+                        product_id: product_id,
+                        quantity: 1
+                    }];
+                } else if (positionThisProductInCart < 0) {
+                    cart.push({
+                        product_id: product_id,
+                        quantity: 1
+                    });
+                } else {
+                    cart[positionThisProductInCart].quantity = cart[positionThisProductInCart].quantity + 1;
+                }
+                addCartToHTML();
+                addCartToMemory();
+            }
+            const addCartToMemory = () => {
+                localStorage.setItem('cart', JSON.stringify(cart));
+            }
+            const addCartToHTML = () => {
+                listCartHTML.innerHTML = '';
+                let totalQuantity = 0;
+                if (cart.length > 0) {
+                    cart.forEach(item => {
+                        totalQuantity = totalQuantity + item.quantity;
+                        let newItem = document.createElement('div');
+                        newItem.classList.add('item');
+                        newItem.dataset.id = item.product_id;
+
+                        let positionProduct = products.findIndex((value) => value.id == item.product_id);
+                        let info = products[positionProduct];
+                        listCartHTML.appendChild(newItem);
+                        newItem.innerHTML = `
+                                    <div class="image">
+                                            <img src="${info.image}">
+                                        </div>
+                                        <div class="name">
+                                        ${info.name}
+                                        </div>
+                                        <div class="totalPrice">$${info.price * item.quantity}</div>
+                                        <div class="quantity">
+                                            <span class="minus"><</span>
+                                            <span>${item.quantity}</span>
+                                            <span class="plus">></span>
+                                        </div>
+                                    `;
+                    })
+                }
+                iconCartSpan.innerText = totalQuantity;
+            }
+
+            listCartHTML.addEventListener('click', (event) => {
+                let positionClick = event.target;
+                if (positionClick.classList.contains('minus') || positionClick.classList.contains('plus')) {
+                    let product_id = positionClick.parentElement.parentElement.dataset.id;
+                    let type = 'minus';
+                    if (positionClick.classList.contains('plus')) {
+                        type = 'plus';
+                    }
+                    changeQuantityCart(product_id, type);
+                }
+            })
+            const changeQuantityCart = (product_id, type) => {
+                let positionItemInCart = cart.findIndex((value) => value.product_id == product_id);
+                if (positionItemInCart >= 0) {
+                    let info = cart[positionItemInCart];
+                    switch (type) {
+                        case 'plus':
+                            cart[positionItemInCart].quantity = cart[positionItemInCart].quantity + 1;
+                            break;
+
+                        default:
+                            let changeQuantity = cart[positionItemInCart].quantity - 1;
+                            if (changeQuantity > 0) {
+                                cart[positionItemInCart].quantity = changeQuantity;
+                            } else {
+                                cart.splice(positionItemInCart, 1);
+                            }
+                            break;
+                    }
+                }
+                addCartToHTML();
+                addCartToMemory();
+            }
+
+            const initApp = () => {
+                // get data product
+                fetch('products.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        products = data;
+                        addDataToHTML();
+
+                        // get data cart from memory
+                        if (localStorage.getItem('cart')) {
+                            cart = JSON.parse(localStorage.getItem('cart'));
+                            addCartToHTML();
+                        }
+                    })
+            }
+            initApp();
+
+        </script>
+
+        <script>
+
+            document.addEventListener('DOMContentLoaded', () => {
+                $.ajax({
+                    url: 'https://restcountries.com/v3.1/name/united',
+                    cache: false,
+                    dataType: 'json',
+                    type: 'GET',
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        // console.log('HTTP status code: ' + jqXHR.status + '\n' +
+                        // 'textStatus: ' + textStatus + '\n' +
+                        // 'errorThrown: ' + errorThrown);
+                        // console.log('HTTP message body (jqXHR.responseText): ' + '\n' + jqXHR.responseText)
+                        const response = JSON.parse(jqXHR.responseText)
+                        console.log('response.message : ponse.errors')
+
+                    },
+                    success: function (response) {
+                        console.log(response)
+                        //if (response[0].region == 'Asia') {
+                        //    window.location.href = 'http://localhost:5230/Members/Login';
+                        //}
+                       
+                    }
+                })
+
+
+                // Existing code...
+
+                const checkOutButton = document.querySelector('.checkOut');
+
+                checkOutButton.addEventListener('click', () => {
+                    // Collect cart data
+                    const orderData = {
+                        orderId: 0, // You might need to generate or use a real order ID
+                        items: cart.map(item => ({
+                            productId: item.product_id,
+                            quantity: item.quantity
+                        }))
+                    };
+
+                    // Send POST request to the checkout API
+                    fetch('http://localhost:5192/api/order', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(orderData),
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                // Handle successful response
+                                alert('Order placed successfully!');
+                                // Optionally clear the cart or redirect to another page
+                                localStorage.removeItem('cart');
+                                cart = [];
+                                updateCart();
+                                window.location.href = 'http://localhost:5230/SysAdmins/Create'; // Redirect to a different page
+                            } else {
+                                // Handle error response
+                                alert('Failed to place order.');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('An error occurred while placing the order.');
+                        });
+                });
+            });
+
+        </script>
+        <!--<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 其他代碼...
+
+            // Event listener for the "check out" button
+            const checkOutButton = document.getElementById('checkOutButton');
+
+            checkOutButton.addEventListener('click', () => {
+                // Save cart to JSON file
+                if (cart.length > 0) {
+                    const cartData = JSON.stringify(cart);
+                    // Here we use a placeholder function for saving data
+                    saveCartToFile(cartData);
+
+                    // Clear cart and local storage
+                    cart = [];
+                    localStorage.removeItem('cart');
+                    updateCart(); // This will clear the cart display
+                }
+
+                // Redirect to the checkout page
+
+                window.location.href = 'http://localhost:5230/SysAdmins/Create';
+            });
+
+            // Function to save cart data to JSON file
+            const saveCartToFile = (data) => {
+                // In a real application, you'd need to send the data to the server
+                // This is just a placeholder for demonstration
+                console.log('Saving cart data to file:', data);
+            };
+
+            // Other existing functions...
+        });
+
+    </script>-->
+        <!--<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const checkOutButton = document.getElementById('checkOutButton');
+
+            checkOutButton.addEventListener('click', () => {
+                // Save cart to JSON file
+                if (cart.length > 0) {
+                    const cartData = JSON.stringify(cart);
+                    saveCartToFile(cartData)
+                        .then(response => response.json())
+                        .then(result => {
+                            console.log(result.message); // Log success message from the server
+
+                            // Clear cart and local storage
+                            cart = [];
+                            localStorage.removeItem('cart');
+                            updateCart(); // This will clear the cart display
+
+                            // Redirect to the checkout page
+                            window.location.href = 'http://localhost:5230/order-confirmation.html';
+                        })
+                        .catch(error => {
+                            console.error('Error saving cart data:', error);
+                            alert('Failed to save cart data.');
+                        });
+                } else {
+                    // Redirect immediately if cart is empty
+                    window.location.href = 'http://localhost:5230/order-confirmation.html';
+                }
+            });
+
+            // Function to save cart data to JSON file
+            const saveCartToFile = (data) => {
+                return fetch('http://localhost:5230/api/cart/save-cart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: data
+                });
+            };
+
+            // Other existing functions...
+        });
+    </script>-->
+
+</body>
+</html >
