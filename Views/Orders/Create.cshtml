@@ -1,0 +1,71 @@
+﻿@model             D05Project.Models.Orders
+
+ @{
+     ViewData["Title"] = "Create";
+} 
+
+<h1>Create</h1>
+
+<h4>Orders</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="orderId" class="control-label"></label>
+                <input asp-for="orderId" class="form-control" />
+                <span asp-validation-for="orderId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MemId" class="control-label"></label>
+                <select asp-for="MemId" class ="form-control" asp-items="ViewBag.MemId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="aId" class="control-label"></label>
+                <select asp-for="aId" class ="form-control" asp-items="ViewBag.aId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="orderDate" class="control-label"></label>
+                <input asp-for="orderDate" class="form-control" />
+                <span asp-validation-for="orderDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="requiredDate" class="control-label"></label>
+                <input asp-for="requiredDate" class="form-control" />
+                <span asp-validation-for="requiredDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="shippedDate" class="control-label"></label>
+                <input asp-for="shippedDate" class="form-control" />
+                <span asp-validation-for="shippedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Freight" class="control-label"></label>
+                <input asp-for="Freight" class="form-control" />
+                <span asp-validation-for="Freight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SName" class="control-label"></label>
+                <input asp-for="SName" class="form-control" />
+                <span asp-validation-for="SName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="下訂單" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+   @*  <a asp-action="Index">Back to List</a> *@
+</div>
+
+<hr />
+
+@*---------------------- 8/17改 *@
+@* 
+<hr />
+<hr />
+@await Component.InvokeAsync("VCOrderDetails", new { id = Model.orderId })
+<hr /> *@
