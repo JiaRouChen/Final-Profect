@@ -1,0 +1,894 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@* @using System.Security.Policy *@
+@{
+    Layout = null;
+    var imageUrls = new List<string>();
+    // for (int i = 1; i <= 10; i++)
+    // {
+    //     imageUrls.Add(Url.Content($"~/lib/SeedSourcePhoto/{i}.JPG"));
+    // }
+    string a = "";
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>月月湯湯線上購</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+
+   
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        header {
+            background-color: rgba(35,28,26,0.8);
+            height: 80px;
+            width: 93%;
+            position: fixed;
+            left: 50%; /* Set left to 50% of the viewport */
+            top: 0; /* Ensure it sticks to the top */
+            transform: translateX(-50%); /* Offset by half its width to center */
+            z-index: 1000; /* Ensure it's above other elements */
+        }
+
+        h1 {
+            color: white;
+            position: absolute;
+            left: 120px;
+            top: 0;
+            line-height: 80px;
+            background-image: url(images/logo.svg);
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 210px;
+            text-indent: -9999px;
+        }
+
+        header ul {
+            position: absolute;
+            right: 5vw;
+            top: 0;
+            line-height: 80px;
+            z-index: 1000; /* Adjust this value if necessary */
+        }
+
+        header li {
+            display: inline;
+            margin-right: 4vw;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+        }
+
+            header a:hover {
+                text-decoration: underline;
+            }
+
+        .news {
+            background-color: antiquewhite;
+            color: #e2a10a;
+            height: 80vh;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .news h1 {
+                font-size: 60px;
+                margin-top: 10px;
+            }
+
+            .news h3 {
+                font-size: 60px;
+                margin-top: 20px;
+            }
+
+            .news p {
+                color: #e2a10a;
+                font-size: 18px;
+                margin: 25px 0;
+            }
+
+            .news a {
+                color: #e2a10a;
+                text-decoration: none;
+                border: 1px solid #ACACAC;
+                padding: 10px 20px;
+                border-radius: 5px;
+            }
+
+        .slogan {
+            background-color: #485652;
+            color: white;
+            height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            line-height: 1.8em;
+        }
+
+        .shop {
+            display: flex;
+        }
+
+            .shop img {
+                width: 50%;
+            }
+
+        .info {
+            width: 75%;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .info h2 {
+                font-size: 40px;
+                margin-bottom: 20px;
+            }
+
+            .info p {
+                text-align: center;
+                line-height: 2em;
+            }
+
+            .info img {
+                display: block; /* Remove extra space below the image */
+                margin: 0; /* Remove default margin */
+                float: left; /* Align the image to the left */
+            }
+
+
+        .newsletter {
+            background-color: #485652;
+            color: white;
+            padding: 60px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 10%
+        }
+
+            .newsletter p {
+                margin-bottom: 20px;
+            }
+
+            .newsletter input, .newsletter button {
+                background-color: transparent;
+                color: white;
+                border: 1px solid #949d9a;
+                padding: 10px;
+                border-radius: 5px;
+                ;
+            }
+
+            .newsletter input {
+                width: 200px;
+                margin-right: 15px;
+                ;
+            }
+
+            .newsletter button {
+                width: 80px;
+                cursor: pointer;
+            }
+
+        input::placeholder {
+            color: #DDDDDD;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #E0E9A3;
+        }
+
+        footer {
+            background-color: #000000;
+            color: #B7B7B7;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .menu {
+            display: none;
+        }
+
+
+        header h2 {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .news h4 {
+            font-size: 30px;
+        }
+
+        .news img {
+            width: 15%;
+            margin-right: 15px; /* Space between the image and the text */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu {
+            display: block;
+            background-color: transparent;
+            color: white;
+            font-size: 35px;
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .shop {
+            flex-direction: column;
+        }
+
+            .shop img {
+                width: 65%;
+                position: center
+            }
+
+        .info {
+            width: 100%;
+            padding: 40px 0;
+        }
+
+
+        .info {
+            display: flex;
+            align-items: center; /* Vertically center the content */
+        }
+
+            .info img {
+                margin-right: 15px; /* Space between image and text */
+            }
+
+            .info h2 {
+                font-size: 25px;
+                text-align: right; /* Align text to the right */
+            }
+
+            .info p {
+                margin: 150px 0 0 0; /* Top margin of 20px */
+            }
+
+
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px; /* 间距 */
+        }
+
+        .item {
+            flex: 1 1 calc(33.333% - 20px); /* 每行三个，减去间距 */
+            box-sizing: border-box;
+            padding: 10px;
+            border: 1px solid #ddd; /* 边框 */
+            border-radius: 8px; /* 圆角 */
+            background: #f9f9f9; /* 背景颜色 */
+        }
+
+            .item img {
+                max-width: 100%;
+                height: auto;
+                display: block;
+                margin-bottom: 10px;
+            }
+
+            .item h3 {
+                margin: 0 0 10px;
+                font-size: 1.2em;
+            }
+
+            .item p {
+                margin: 0 0 10px;
+                font-size: 1em;
+            }
+
+            .item button {
+                display: inline-block;
+                padding: 10px 20px;
+                font-size: 1em;
+                color: #fff;
+                background-color: #007bff;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+                .item button:hover {
+                    background-color: #0056b3;
+                }
+
+        #footer {
+            background-color: #000; /* 黑色背景 */
+            color: #fff; /* 白色文字 */
+            padding: 10px; /* 內邊距 */
+            text-align: center; /* 文字置中 */
+            font-size: 14px; /* 字體大小 */
+            border-top: 1px solid #444; /* 上邊框 */
+        }
+
+            #footer a {
+                color: yellowgreen; /* 超連結文字顏色 */
+                text-decoration: none; /* 去除下劃線 */
+            }
+
+                #footer a:hover {
+                    text-decoration: underline; /* 滑鼠懸停時顯示下劃線 */
+                }
+
+
+
+/* 
+                ----------------------- */
+
+        .jumbotron {
+            background-color: antiquewhite;
+            background-image: url('photo/00.jpg');
+            background-repeat: round;
+        }
+
+        .h1Shadow {
+            text-shadow: 3px 3px black;
+        }
+
+        .pShadow {
+            text-shadow: 1px 1px black;
+        }
+
+
+        .fs-0 {
+            font-size: 5rem;
+        }
+
+
+        /* ----- */
+
+        body {
+            background-color: antiquewhite; /* 全站背景顏色 */
+        }
+   
+
+        /* 新聞區塊 */
+        .news {
+            background-color: antiquewhite; /* 設置為 antiquewhite */
+            color: #e2a10a; /* 文字顏色保持不變 */
+        }
+
+        /* 商店區塊 */
+        .shop {
+            background-color: antiquewhite; /* 設置為 antiquewhite */
+        }
+
+        /* 資訊區塊 */
+        .info {
+            background-color: antiquewhite; /* 設置為 antiquewhite */
+        }
+
+        /* 電子報區 */
+        .newsletter {
+            background-color: antiquewhite; /* 設置為 antiquewhite */
+        }
+
+        /* 頁腳 */
+        footer {
+            background-color: antiquewhite; /* 設置為 antiquewhite */
+            color: #B7B7B7; /* 文字顏色保持不變 */
+        }
+
+        .card{
+            background-color: lightyellow
+        }
+        .card img {
+            width: 90%; 
+            height: auto; /* 自動調整高度，保持圖片比例 */
+            object-fit: cover; /* 確保圖片填滿容器並保持比例 */
+          
+        
+        }
+
+
+        .MyBgImage {
+    display: flex; /* Enable flexbox layout */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically (optional) */
+    height: 100vh; /* Full viewport height (adjust as needed) */
+    background: url('path-to-your-background-image.jpg') no-repeat center center;
+    background-size: cover; /* Adjust background image size */
+}
+
+.container {
+    max-width: 100%; /* Ensure the container does not overflow */
+}
+
+#carouselExampleCaptions {
+    width: 100%; /* Make the carousel responsive */
+    max-width: 1200px; /* Set a max width for the carousel */
+}
+
+    </style>
+
+@*     <style>
+        .bg-items {
+            position: relative;
+        }
+
+        .items {
+            position: relative;
+            width: 240px; /* 设置与图片尺寸一致 */
+            height: 160px; /* 设置与图片尺寸一致 */
+            overflow: hidden;
+        }
+
+            .items img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover; /* 确保图片填充容器 */
+            }
+
+        .tl6, .tr6, .br6, .bl6 {
+            position: absolute;
+            width: 120px;
+            height: 80px;
+            background-color: rgb(188, 174, 173);
+            transition: all .3s;
+            z-index: 1; /* 确保在其他内容之上 */
+        }
+
+        .tl6 {
+            top: -80px;
+            left: -120px;
+        }
+
+        .tr6 {
+            top: -80px;
+            right: -120px;
+        }
+
+        .br6 {
+            bottom: -80px;
+            right: -120px;
+        }
+
+        .bl6 {
+            bottom: -80px;
+            left: -120px;
+        }
+
+        .items:hover .tl6 {
+            top: 0;
+            left: 0;
+        }
+
+        .items:hover .tr6 {
+            top: 0;
+            right: 0;
+        }
+
+        .items:hover .br6 {
+            bottom: 0;
+            right: 0;
+        }
+
+        .items:hover .bl6 {
+            bottom: 0;
+            left: 0;
+        }
+
+        .details {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            padding: 10px;
+            width: 100%;
+            opacity: 1; /* 初始可见 */
+            transition: opacity .3s; /* 平滑过渡效果 */
+            z-index: 2; /* 确保在边框特效之上 */
+        }
+
+        .items:hover .details {
+            opacity: 0; /* 悬停时隐藏 */
+        }
+    </style> *@
+
+</head>
+<body>
+    <header>
+        @*   <button class="menu">菜單</button>
+        <h1>天天都是喝好湯的日子</h1> *@
+        <nav class="banner">
+            <ul>
+                <li><a href="http://localhost:5230/MainPage/Create">首頁</a></li>
+                <li><a href="http://localhost:5230/About/Index">認識我們</a></li>
+                <li><a href="http://localhost:5230/Overview/Index">商品總覽</a></li>
+                <li><a href="http://localhost:5230/PostBooks">顧客留言區</a></li>
+                <li><a href="http://localhost:5230/Members/Login">會員登入</a></li>
+                <li><a href="http://localhost:5230/Admins/Login">管理員登入</a></li>
+            </ul>
+       
+        </nav>
+    </header>
+
+       @*  <section class="product">
+            <div class="container">
+                <div id="item1" class="item">
+                    <img src="~/lib/SeedSourcePhoto/2.JPG" alt="Just">
+                    <h3>好湯一再推薦，經典之選<br>——番茄紅酒燉牛肉湯</h3>
+                    <p>紅酒的醇厚，牛肉香氣嫩滑<br>享受時刻</p>
+                    <button onclick="order()">我要訂購</button>
+                    <p>定價200元/袋</p>
+                </div>
+                <div id="item2" class="item">
+                    <img src="~/lib/SeedSourcePhoto/3.JPG" alt="555">
+                    <h3>日日配方x滋補佳品<br>——柑橘蔥雞湯</h3>
+                    <p>滋補與美味的完美結合<br>日日爆單</p>
+                    <button onclick="order()">我要訂購</button>
+                    <p>定價200元/袋</p>
+                </div>
+                <div id="item3" class="item">
+                    <img src="~/lib/SeedSourcePhoto/4.JPG" alt="奧妙">
+                    <h3>梅香辣味，滋補鮮湯<br>——梅子剝皮辣椒雞湯</h3>
+                    <p>創意的奧妙<br>意想不到的層次，讓美味與健康同行</p>
+                    <button onclick="order()">我要訂購</button>
+                    <p>定價200元/袋</p>
+                </div>
+                <div id="item4" class="item">
+                    <img src="~/lib/SeedSourcePhoto/6.JPG" alt="奧妙">
+                    <h3>清新開胃，獨特風味<br>——酸白菜椰奶疏時湯</h3>
+                    <p>爽口與椰奶的絲滑相得益彰<br>清新滋味，完美結合</p>
+                    <button onclick="order()">我要訂購</button>
+                    <p>定價200元/袋</p>
+                </div>
+                <div id="item5" class="item">
+                    <img src="~/lib/SeedSourcePhoto/7.JPG" alt="奧妙">
+                    <h3>融合風味，甜蜜新體驗<br>——馬告可可芋泥甜湯</h3>
+                    <p>細膩的芋泥<br>融合經典與創新</p>
+                    <button onclick="order()">我要訂購</button>
+                    <p>定價100元/袋</p>
+                </div>
+                @*                 <div id="item6" class="item">
+                <img src="~/lib/SeedSourcePhoto/8.JPG" alt="奧妙">
+                <h3>甜蜜滋味，舌尖享受<br>——地瓜芋圓甜湯</h3>
+                <p>軟糯香甜<br>甜蜜在心，溫暖在舌尖</p>
+                <button onclick="order()">我要訂購</button>
+                <p>定價200元/袋</p>
+                </div>*@
+      @*           <div id="item7" class="item">
+                    <img src="~/lib/SeedSourcePhoto/99.JPG" alt="奧妙">
+                    <h3>地瓜軟糯x腰果香脆<br>——地瓜腰果濃湯佐鳳梨</h3>
+                    <p>酸甜與濃郁絕妙搭配<br>每一口的幸福滋味</p>
+                    <button onclick="order()">我要訂購</button>
+                    <p>定價200元/袋</p>
+                </div>
+        </section> *@ 
+
+
+
+ 
+
+@*     ----------- *@
+<br>
+    <br>
+    <br>
+<br>
+    <div class="card my-3">
+        <div class="row g-0">
+            <div class="col-lg-4">
+                <img src="~/lib/SeedSourcePhoto/2.JPG" alt="Just" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-lg-8">
+                <div class="card-body">
+                    <h3 class="card-title fw-bold">好湯一再推薦，經典之選<br>——番茄紅酒燉牛肉湯</h3>
+                    <p class="card-text">
+                    <p>紅酒的醇厚，牛肉香氣嫩滑<br>享受時刻</p>
+                    一款不容錯過的美味佳品，融合紅酒的醇厚與牛肉的嫩滑，為你帶來極致的味覺享受。
+
+                    每一口都滿溢著紅酒的濃郁香氣和番茄的酸甜，細膩入味的牛肉在湯中慢燉至完美，令每一口都充滿驚喜。這款經典湯品，無論是與家人共享溫馨時光，還是獨享悠閒午後，都能帶來無與倫比的美好體驗。
+
+
+                    品味經典，享受時刻，讓每一天都充滿美味。
+
+                    立即訂購，讓味覺之旅從一碗湯開始！
+                    <p>
+                        定價<br>200元/400ml<br>
+                        580元/1200ml
+                    </p>
+                    </p>
+                    <a href="http://localhost:5230/cartindex.html">
+                        <button class="btn btn-success">了解更多</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card my-3">
+        <div class="row g-0">
+
+            <div class="col-lg-8">
+                <div class="card-body">
+                    <h3 class="card-title fw-bold">日日配方x滋補佳品<br>——柑橘蔥雞湯</h3>
+                    <p class="card-text">
+                    滋補與美味的完美結合<br>日日爆單
+                    <br>
+                        這款湯品完美融合了清新的柑橘與香蔥的獨特風味，每一口都充滿滋補和養身的美味。柑橘的清香與蔥的溫暖口感相得益彰，不僅能提升免疫力，還能讓你享受每一餐的愉悅。日日爆單，已成為眾多家庭的首選佳品。帶給你健康與美味的雙重享受。立即品嚐，讓你的生活更添活力與美味！
+                    <br>
+                        定價<br>160元/400ml<br>
+                        460元/1200ml
+                        </h2>
+                    </p>
+                    <a href="http://localhost:5230/cartindex.html">
+                        <button class="btn btn-success">了解更多</button>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <img src="~/lib/SeedSourcePhoto/3.JPG" alt="555"  class="img-fluid rounded-start" alt="...">
+            </div>
+          
+
+        </div>
+    </div>
+
+    <div class="card my-3">
+        <div class="row g-0">
+            <div class="col-lg-4">
+                <img src="~/lib/SeedSourcePhoto/4.JPG" alt="奧妙" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-lg-8">
+                <div class="card-body">
+                    <h3 class="card-title fw-bold">梅香辣味，滋補鮮湯<br>——梅子剝皮辣椒雞湯</h3>
+                    <p class="card-text">
+                        創意的奧妙<br>意想不到的層次，讓美味與健康同行
+                        <br>
+                        獨特梅香與辣椒的完美結合，帶來意想不到的層次與豐富風味。每一口都充滿滋補效果，讓你在享受美味的同時，也能獲得健康的呵護。這款創意湯品不僅滿足你的味蕾，還能提升免疫力，讓每一天都充滿活力。品味梅香與辣味的雙重魅力，讓美味與健康同行。立即訂購，感受不一樣的滋補享受！
+                    <p>
+                        定價<br>170元/400ml<br>
+                        490元/1200ml
+                    </p>
+                    </p>
+                    <a href="http://localhost:5230/cartindex.html">
+                        <button class="btn btn-success">了解更多</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card my-3">
+        <div class="row g-0">
+
+            <div class="col-lg-8">
+                <div class="card-body">
+                    <h3 class="card-title fw-bold">清新開胃，獨特風味<br>——酸白菜椰奶疏時湯</h3>
+                    <p class="card-text">
+                        爽口與椰奶的絲滑相得益彰<br>清新滋味，完美結合
+                        <br>
+
+                        酸白菜椰奶疏時湯
+                        這款湯品巧妙結合了酸白菜的爽口酸味和椰奶的絲滑細膩，為你的味蕾帶來全新的感受。酸白菜的酸爽與椰奶的豐盈完美融合，創造出一種既清新又滋養的風味。每一口湯都能感受到酸白菜的清新脆口，搭配椰奶的柔滑細膩，讓整體口感更為層次分明。這種獨特的風味不僅能有效開胃，還能給你帶來舒適的暖身體驗。無論是寒冷的冬天還是平日的晚餐，這款湯品都能為你的餐桌增添一份獨特的美味和健康。給你帶來清新與滋養的雙重享受。立即訂購，讓酸白菜與椰奶的完美結合成為你生活中的新寵，體驗那份不同尋常的美好滋味！
+                    <p>
+                        定價<br>155元/400ml<br>
+                        445元/1200ml
+                    </p>
+                    </p>
+                    <a href="http://localhost:5230/cartindex.html">
+                        <button class="btn btn-success">了解更多</button>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <img src="~/lib/SeedSourcePhoto/6.JPG" alt="奧妙" class="img-fluid rounded-end" alt="...">
+            </div>
+        </div>
+    </div>
+    <div class="card my-3">
+        <div class="row g-0">
+            <div class="col-lg-4">
+                <img src="~/lib/SeedSourcePhoto/7.JPG" alt="奧妙" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-lg-8">
+                <div class="card-body">
+                    <h3 class="card-title fw-bold">融合風味，甜蜜新體驗
+                        <br>——馬告可可芋泥甜湯</h3>
+                    
+                    <p class="card-text">
+                    <p>細膩的芋泥<br>融合經典與創新</p>
+                    <br>
+                    這款甜湯巧妙融合了濃郁的可可香、獨特的馬告風味和柔滑的芋泥，為你帶來全新的甜蜜體驗。可可的香濃與馬告的獨特芳香完美融合，每一口湯都能品味到多層次的風味，讓人一試成主顧。芋泥的絲滑口感與甜美風味，更是讓這款湯品成為甜品中的佳作。無論是作為餐後甜點，還是午後的小確幸，它都能給你帶來無比的滿足感。讓你在享受美味的同時，體驗到甜蜜與創意的完美結合。立即訂購，感受這份獨特的風味與甜蜜，讓每一餐都充滿驚喜！
+                    <p>定價<br>200元/400ml</p>
+                    </p>
+                    <a href="http://localhost:5230/cartindex.html">
+                        <button class="btn btn-success">了解更多</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card my-3">
+        <div class="row g-0">
+
+            <div class="col-lg-8">
+                <div class="card-body">
+                    <h3 class="card-title fw-bold">地瓜軟糯x腰果香脆
+                        <br>——地瓜腰果濃湯佐鳳梨</h3>
+                    <p class="card-text">
+                        酸甜與濃郁絕妙搭配<br>每一口的幸福滋味
+                        <br>
+                        這款地瓜腰果濃湯完美融合了地瓜的軟糯與腰果的香脆，為你帶來一種獨特的口感享受。地瓜的自然甜美與濃郁湯底相互輝映，而腰果則增添了額外的脆感和風味，使每一口都充滿層次感。搭配上酸甜可口的鳳梨，這種酸甜與濃郁的絕妙搭配，為你的味蕾提供了一場別開生面的美食盛宴。
+
+                        每一碗湯都經過精心調製，讓地瓜的細膩口感與腰果的香脆質地達到完美平衡。鳳梨的酸甜則為湯品增添了清新的風味，讓每一口都充滿幸福的滋味。無論是作為開胃湯品還是餐後甜點，它都能讓你感受到滿滿的愉悅和滿足。
+
+                        這款湯品不僅能豐富你的餐桌，還能讓你在品味美食的同時，享受到獨特的口感體驗。立即訂購，讓地瓜的柔滑、腰果的脆香和鳳梨的酸甜，成為你日常餐飲中的新寵，體驗每一口的幸福滋味！
+                    <p>定價<br>200元/400ml</p>
+                    </p>
+                    <a href="http://localhost:5230/cartindex.html">
+                        <button class="btn btn-success">了解更多</button>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <img src="~/lib/SeedSourcePhoto/99.JPG" alt="奧妙" class="img-fluid rounded-end" alt="...">
+            </div>
+        </div>
+    </div>
+ 
+
+@* 
+   <div>
+    <div class="MyBgImage">
+        <section class="container">
+            <div id="carouselExampleCaptions" class="mt-4 carousel slide d-none d-md-block" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                            aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3"
+                            aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4"
+                            aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="5"
+                            aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="6"
+                            aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="7"
+                            aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="8"
+                            aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="~/lib/SeedSourcePhoto/2.JPG" alt="Just">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h1 class="h1Shadow fw-bold">馬雅文化遺跡</h1>
+                            <p>Some representative placeholder content for the first slide.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="~/lib/SeedSourcePhoto/3.JPG" alt="Just">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h1 class="h1Shadow fw-bold">吳哥窟</h1>
+                            <p>Some representative placeholder content for the second slide.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="~/lib/SeedSourcePhoto/4.JPG" alt="Just">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h1 class="h1Shadow fw-bold">下龍灣</h1>
+                            <p>Some representative placeholder content for the second slide.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="~/lib/SeedSourcePhoto/5.JPG" alt="Just">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Second slide label</h5>
+                            <p>Some representative placeholder content for the second slide.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="~/lib/SeedSourcePhoto/6.JPG" alt="Just">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Second slide label</h5>
+                            <p>Some representative placeholder content for the second slide.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="~/lib/SeedSourcePhoto/7.JPG" alt="Just">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Second slide label</h5>
+                            <p>Some representative placeholder content for the second slide.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="~/lib/SeedSourcePhoto/8.JPG" alt="Just">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Second slide label</h5>
+                            <p>Some representative placeholder content for the second slide.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="~/lib/SeedSourcePhoto/99.JPG" alt="Just">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Second slide label</h5>
+                            <p>Some representative placeholder content for the second slide.</p>
+                        </div>
+                    </div>
+
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+
+        </div> *@
+        <br>
+        <br>
+        <br>
+
+    <section id="footer">
+        Copyright &copy; @DateTime.Now.Year - 月月湯湯—湯品專賣舖 - <a asp-area="" asp-controller="Home" asp-action="Privacy">本站隱私權政策</a> | 最後更新時間: @DateTime.Now
+            </section>
+
+
+
+
+ @*  ----------- *@
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
+    <script>
+
+        const myModal = new bootstrap.Modal('#login', {
+            keyboard: false,
+            backdrop: false
+        })
+        
+    </script>
+
+</body>
+</html>
+
