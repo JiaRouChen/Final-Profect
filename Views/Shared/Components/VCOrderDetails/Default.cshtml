@@ -1,0 +1,59 @@
+﻿@model             IEnumerable<D05Project.Models.OrderDetail>
+
+@{
+    Layout = null;
+}
+
+<h3 class="text-center">商品明細</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.pId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductPrice)
+            </th>
+       
+            <th>
+                小計
+            </th>
+            <th>
+               
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductPrice)
+                </td>
+            
+                <td>
+                    @* @(item.UnitPrice*item.Quantity*(1-@item.Discount)) *@
+                </td>
+                <td>
+                   
+                </td>
+                <td>
+                   
+                
+                    @Html.ActionLink("刪除", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
