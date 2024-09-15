@@ -1,0 +1,220 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<style>
+
+
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column; /* 改为垂直排列 */
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .form-container {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 500px;
+    }
+
+    h2 {
+        color: #333;
+        font-size: 24px;
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    .form-group {
+        display: flex;
+        margin-bottom: 15px;
+        align-items: center;
+    }
+
+        .form-group label {
+            flex: 0 0 100px;
+            font-size: 16px;
+            color: #333;
+            margin-right: 10px;
+        }
+
+        .form-group input {
+            flex: 1;
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+            .form-group input:focus {
+                border-color: #888;
+                outline: none;
+            }
+
+        .form-group .required {
+            color: red;
+            margin-left: 5px;
+        }
+
+    hr {
+        border: none;
+        border-top: 1px solid #ccc;
+        margin: 20px 0;
+    }
+
+    /* 提交按鈕樣式 */
+    .submit-btn {
+        background-color: #6F4F28; /* 咖啡色 */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+        .submit-btn:hover {
+            background-color: #5a3e1f;
+        }
+</style>
+
+<style>
+    .step-indicator {
+        display: flex;
+        justify-content: space-between;
+        width: 60%;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .step {
+        flex: 1;
+        position: relative;
+        padding: 10px;
+    }
+
+    .step-number {
+        width: 40px;
+        height: 40px;
+        margin: 0 auto;
+        border-radius: 50%;
+        background-color: #ccc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .step-label {
+        margin-top: 10px;
+        color: #888;
+    }
+
+    .step.active .step-number {
+        background-color: #bc8a42; /* Gold color */
+    }
+
+    .step.active .step-label {
+        color: #000;
+    }
+
+    /* 移除線條 */
+    .step::before,
+    .step::after {
+        display: none;
+    }
+</style>
+
+<body>
+    <div class="step-indicator">
+        <div class="step active">
+            <div class="step-number">01</div>
+            <div class="step-label">購物清單</div>
+        </div>
+        <div class="step active">
+            <div class="step-number">02</div>
+            <div class="step-label">填寫資料</div>
+        </div>
+        <div class="step">
+            <div class="step-number">03</div>
+            <div class="step-label">完成訂單</div>
+        </div>
+    </div>
+
+    <div class="form-container">
+        <h2>訂購人資料</h2>
+        <hr>
+        <div class="form-group">
+            <label for="name">姓名<span class="required">*</span></label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">聯絡電話</label>
+            <input type="text" id="phone" name="phone">
+        </div>
+        <div class="form-group">
+            <label for="mobile">行動電話<span class="required">*</span></label>
+            <input type="text" id="mobile" name="mobile" required>
+        </div>
+        <div class="form-group">
+            <label for="email">電子郵件<span class="required">*</span></label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="address">聯絡地址<span class="required">*</span></label>
+            <input type="text" id="address" name="address" required>
+        </div>
+        <a href="javascript:void(0);" class="submit-btn" onclick="saveData()">提交資料</a>
+    </div>
+
+    <script>
+        function saveData() {
+            // 获取表单数据
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const mobile = document.getElementById('mobile').value;
+            const email = document.getElementById('email').value;
+            const address = document.getElementById('address').value;
+
+            // 创建 JSON 对象
+            const formData = {
+                name: name,
+                phone: phone,
+                mobile: mobile,
+                email: email,
+                address: address
+            };
+
+            // 发送 POST 请求到服务器
+            fetch('http://localhost:5230/save-data', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+                .then(response => {
+                    if (response.ok) {
+                        // 跳转到订单确认页面
+                        window.location.href = "http://localhost:5230/order-confirmation.html";
+                    } else {
+                        alert('提交失败，请稍后再试。');
+                    }
+                })
+                .catch(error => {
+                    console.error('提交数据时发生错误:', error);
+                    alert('提交失败，请稍后再试。');
+                });
+        }
+    </script>
+</html>

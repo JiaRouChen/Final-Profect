@@ -1,0 +1,38 @@
+[
+	{
+		"id": 1,
+		"name": "紅酒燉牛肉湯",
+		"price": 200,
+		"image": "/lib/SeedSourcePhoto/2.JPG"
+	},
+	{
+		"id": 2,
+		"name": "柑橘蔥雞湯",
+		"price": 200,
+		"image": "/lib/SeedSourcePhoto/3.JPG"
+	},
+	{
+		"id": 3,
+		"name": "剝皮辣椒梅子雞湯",
+		"price": 200,
+		"image": "/lib/SeedSourcePhoto/4.JPG"
+	},
+	{
+		"id": 4,
+		"name": "酸白菜椰奶雞湯",
+		"price": 200,
+		"image": "/lib/SeedSourcePhoto/6.JPG"
+	},
+	{
+		"id": 5,
+		"name": "馬告可可芋泥甜湯",
+		"price": 100,
+		"image": "/lib/SeedSourcePhoto/7.JPG"
+	},
+	{
+		"id": 6,
+		"name": "腰果地瓜濃湯佐鳳梨",
+		"price": 200,
+		"image": "/lib/SeedSourcePhoto/99.JPG"
+	}
+]

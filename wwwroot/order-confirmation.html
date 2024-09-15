@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>訂單確認</title>
+    <style>
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column; /* 改为垂直排列 */
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            width: 100%; /* 使其占满宽度 */
+            max-width: 500px; /* 设置最大宽度 */
+            text-align: center;
+            margin-bottom: 20px; /* 增加与下方内容的间距 */
+        }
+
+        .confirmation {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            background-color: #ffffff;
+            text-align: center;
+            max-width: 500px;
+            width: 100%; /* 使其占满宽度 */
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .confirmation {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            background-color: #ffffff;
+            text-align: center;
+            max-width: 500px;
+            margin: 20px;
+        }
+
+            .confirmation h1 {
+                color: #6F4F28; /* 咖啡色 */
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+
+            .confirmation p {
+                font-size: 16px;
+                color: #333;
+                margin: 10px 0;
+            }
+
+            .confirmation a {
+                text-decoration: none;
+                color: #6F4F28; /* 咖啡色 */
+                font-weight: bold;
+                border: 2px solid #6F4F28; /* 咖啡色 */
+                border-radius: 5px;
+                padding: 10px 20px;
+                transition: background-color 0.3s, color 0.3s;
+            }
+
+                .confirmation a:hover {
+                    background-color: #6F4F28; /* 咖啡色 */
+                    color: #fff;
+                }
+
+            .confirmation span {
+                font-weight: bold;
+            }
+    </style>
+
+    <style>
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            width: 60%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .step {
+            flex: 1;
+            position: relative;
+            padding: 10px;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto;
+            border-radius: 50%;
+            background-color: #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .step-label {
+            margin-top: 10px;
+            color: #888;
+        }
+
+        .step.active .step-number {
+            background-color: #bc8a42; /* Gold color */
+        }
+
+        .step.active .step-label {
+            color: #000;
+        }
+
+        /* 移除線條 */
+        .step::before,
+        .step::after {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="step-indicator">
+        <div class="step active">
+            <div class="step-number">01</div>
+            <div class="step-label">購物清單</div>
+        </div>
+        <div class="step active">
+            <div class="step-number">02</div>
+            <div class="step-label">填寫資料</div>
+        </div>
+        <div class="step active" >
+            <div class="step-number">03</div>
+            <div class="step-label">完成訂單</div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <hr>
+    <div class="confirmation">
+        <h1>訂單確認</h1>
+        <p>感謝您的購買！您的訂單已經成功提交。</p>
+        <p>訂單編號：<span id="orderId">123456</span></p>
+        <p>預計送達時間：<span id="deliveryTime">3-5個工作日</span></p>
+        <p><a href="http://localhost:5230/MainPage/Create">返回首頁</a></p>
+    </div>
+    <script>
+        // 通過URL參數或後端返回的數據填充訂單編號和送達時間
+        const urlParams = new URLSearchParams(window.location.search);
+        const orderId = urlParams.get('orderId');
+        const deliveryTime = urlParams.get('deliveryTime') || '3-5個工作日';
+
+        if (orderId) {
+            document.getElementById('orderId').textContent = orderId;
+        }
+        document.getElementById('deliveryTime').textContent = deliveryTime;
+
+        /*--*/
+        function generateRandomNumberCode(length) {
+            const characters = '0123456789';
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                const randomIndex = Math.floor(Math.random() * characters.length);
+                result += characters[randomIndex];
+            }
+            return result;
+        }
+
+        document.getElementById('orderId').textContent = generateRandomNumberCode(10);
+
+    </script>
+
+
+</body>
+</html>
