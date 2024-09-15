@@ -1,0 +1,52 @@
+﻿@model             D05Project.Models.Member
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Member</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="MemId" />
+            <div class="form-group">
+                <label asp-for="MemName" class="control-label"></label>
+                <input asp-for="MemName" class="form-control" />
+                <span asp-validation-for="MemName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MemTel" class="control-label"></label>
+                <input asp-for="MemTel" class="form-control" />
+                <span asp-validation-for="MemTel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MemEmail" class="control-label"></label>
+                <input asp-for="MemEmail" class="form-control" />
+                <span asp-validation-for="MemEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MemBirth" class="control-label"></label>
+                <input asp-for="MemBirth" class="form-control" />
+                <span asp-validation-for="MemBirth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Memaddress" class="control-label"></label>
+                <input asp-for="Memaddress" class="form-control" />
+                <span asp-validation-for="Memaddress" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+  @*   <a asp-action="Index">Back to List</a> *@
+</div>
+

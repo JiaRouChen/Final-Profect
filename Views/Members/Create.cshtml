@@ -1,0 +1,186 @@
+﻿@model             D05Project.Models.Member
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+@* <h1>Create</h1> *@
+<style>
+
+    /* 页面背景容器样式 */
+    .container {
+        background-color: #FBEFE1; /* 米白色背景 */
+        background-image: url('path/to/your/background-image.png'); /* 背景图像路径，确保替换成实际图像路径 */
+        background-size: cover; /* 使背景图像覆盖整个容器 */
+        background-position: center; /* 背景图像居中 */
+        background-repeat: no-repeat; /* 避免背景图像重复 */
+        padding: 2rem;
+        border-radius: .5rem;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 增加阴影效果 */
+    }
+
+    h1, h4 {
+        color: #343a40; /* 深灰色字体 */
+    }
+
+    .alert-danger {
+        margin-bottom: 1rem;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+    }
+
+    input::placeholder {
+        color: #6c757d;
+    }
+
+    .form-control {
+        border-radius: .375rem;
+        border: 1px solid #ced4da;
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, .075);
+    }
+
+    .btn-lg {
+        padding: .75rem 1.25rem;
+        font-size: 1.25rem;
+        border-radius: .3rem;
+    }
+</style>
+
+
+
+<h4 class="mb-4" style="text-align: center;"><img id="orderIcon" src="~/lib/SeedSourcePhoto/1.JPG" alt="Just" style="width: 15%; height: auto; margin-right: 10px;">月月湯湯專賣鋪會員申請</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+            <div class="form-group mb-3">
+                <label asp-for="MemId" class="form-label"></label>
+                <input asp-for="MemId" class="form-control" placeholder="輸入帳號" />
+                <span asp-validation-for="MemId" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="MemName" class="form-label"></label>
+                <input asp-for="MemName" class="form-control" placeholder="輸入姓名" />
+                <span asp-validation-for="MemName" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="MemTel" class="form-label"></label>
+                <input asp-for="MemTel" type="password" class="form-control" placeholder="輸入密碼" />
+                <span asp-validation-for="MemTel" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="MemEmail" class="form-label"></label>
+                <input asp-for="MemEmail" class="form-control" placeholder="輸入信箱" />
+                <span asp-validation-for="MemEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="MemBirth" class="form-label"></label>
+                <input asp-for="MemBirth" type="date" class="form-control" />
+                <span asp-validation-for="MemBirth" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Memaddress" class="form-label"></label>
+                <input asp-for="Memaddress" class="form-control" placeholder="輸入地址" />
+                <span asp-validation-for="Memaddress" class="text-danger"></span>
+            </div>
+           @*  <div class="form-group mb-3 form-check">
+                <input class="form-check-input" asp-for="Memgender" id="Memgender" type="checkbox" />
+                <label class="form-check-label" for="Memgender">
+                    @Html.DisplayNameFor(model => model.Memgender)男  
+                </label>
+            </div>
+         *@
+
+            <div class="form-group mb-3">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Memgender" id="Male" type="checkbox" value="True" />
+                    男
+                </label>
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Memgender" id="Female" type="checkbox" value="False" />
+                    女
+                </label>
+                <span asp-validation-for="Memgender" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-lg">確認註冊</button>
+            </div>
+        </form>
+    </div>
+<br>
+<br>
+<div class="mt-4">
+        <a href="http://localhost:5230/MainPage/Create"
+           style="display: inline-block; padding: 10px 20px; font-size: 16px; color: white; background-color:darkred; text-align: center; text-decoration: none; border-radius: 5px;">
+            回首頁
+        </a>
+</div>
+<br>
+<br>
+    <br>
+    <br><br>
+    <br>
+@* <h4>Member</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MemId" class="control-label"></label>
+                <input asp-for="MemId" class="form-control" />
+                <span asp-validation-for="MemId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MemName" class="control-label"></label>
+                <input asp-for="MemName" class="form-control" />
+                <span asp-validation-for="MemName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MemTel" class="control-label"></label>
+                <input asp-for="MemTel" class="form-control" />
+                <span asp-validation-for="MemTel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MemEmail" class="control-label"></label>
+                <input asp-for="MemEmail" class="form-control" />
+                <span asp-validation-for="MemEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MemBirth" class="control-label"></label>
+                <input asp-for="MemBirth" class="form-control" />
+                <span asp-validation-for="MemBirth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Memaddress" class="control-label"></label>
+                <input asp-for="Memaddress" class="form-control" />
+                <span asp-validation-for="Memaddress" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Memgender" /> @Html.DisplayNameFor(model => model.Memgender)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="註冊" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+ *@

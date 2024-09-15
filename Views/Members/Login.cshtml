@@ -1,0 +1,218 @@
+﻿@* @model D05Project.Models.Member
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>Login</h1>
+
+<h4>Member</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        
+            <div class="form-group">
+                <label asp-for="MemEmail" class="control-label"></label>
+                <input asp-for="MemEmail" class="form-control" />
+                <span asp-validation-for="MemEmail" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MemTel" class="control-label"></label>
+                <input asp-for="MemTel" class="form-control" type="password" />
+                <span asp-validation-for="MemTel" class="text-danger"></span>
+            </div>
+         
+            <div class="form-group">
+                <input type="submit" value="登入" class="btn btn-primary" />
+            </div>
+
+           
+
+        </form>
+
+        <br>
+     
+        <a href="http://localhost:5230/Members/Create" style="text-decoration: none;">
+            <button type="button"
+                    style="
+                background-color: #007bff; /* 藍色背景 */
+                color: white; /* 白色文字 */
+                border: none; /* 去除邊框 */
+                padding: 10px 20px; /* 內邊距 */
+                border-radius: 5px; /* 圓角按鈕 */
+                font-size: 16px; /* 字體大小 */
+                cursor: pointer; /* 指針樣式 */
+                transition: background-color 0.3s; /* 背景顏色過渡效果 */
+            "
+                    onmouseover="this.style.backgroundColor='#0056b3';" /* 滑鼠懸停時的顏色 * /
+                    onmouseout="this.style.backgroundColor='#007bff';" /* 滑鼠離開時的顏色 * />
+                會員註冊
+            </button>
+        </a>
+    </div>
+</div>
+ *@
+
+
+ @model D05Project.Models.Member
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<style>
+    .background-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 200%;
+        height: 100%;
+        background-image: url('/lib/SeedSourcePhoto/1.JPG');
+        background-size: 50%; /* 根據需要調整 */
+        background-position: left;
+        /* background-repeat: no-repeat; */
+        background-attachment: fixed;
+        z-index: -1; /* 確保背景在其他內容下方 */
+    }
+    body {
+        background-color: white; /* 页面背景色 */
+    }
+
+    .container {
+        background-color: white; /* 白色背景 */
+        padding: 2rem;
+        border-radius: .5rem;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+        max-width: 500px;
+        margin: 2rem auto;
+    }
+
+    h1 {
+        color: #343a40; /* 深灰色字体 */
+        text-align: center;
+    }
+
+    h4 {
+        color: #6c757d; /* 淡灰色字体 */
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        font-weight: bold;
+        color: #495057; /* 表单标签颜色 */
+    }
+
+    .form-control {
+        border-radius: .375rem;
+        border: 1px solid #ced4da;
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+        padding: .75rem;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        padding: .75rem 1.5rem;
+        font-size: 1rem;
+        border-radius: .375rem;
+        transition: background-color 0.3s, border-color 0.3s;
+        display: block; /* 确保按钮块级显示 */
+        width: 100%; /* 按钮宽度100% */
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+    .custom-button {
+        background-color: #007bff; /* 按钮背景色 */
+        color: white; /* 文字颜色 */
+        border: none; /* 去除边框 */
+        padding: 10px 20px; /* 内边距 */
+        border-radius: 5px; /* 圆角按钮 */
+        font-size: 16px; /* 字体大小 */
+        cursor: pointer; /* 指针样式 */
+        transition: background-color 0.3s; /* 背景颜色过渡效果 */
+        display: inline-block; /* 按钮内联块级显示 */
+        text-align: center; /* 文本居中 */
+        text-decoration: none; /* 去除下划线 */
+        margin-top: 1rem; /* 顶部间距 */
+        width: 100%; /* 按钮宽度100% */
+    }
+
+        .custom-button:hover {
+            background-color: #0056b3; /* 鼠标悬停时的颜色 */
+        }
+
+    .alert-danger {
+        margin-bottom: 1rem;
+        background-color: #f8d7da; /* 警告背景色 */
+        color: #721c24; /* 警告文字颜色 */
+        border: 1px solid #f5c6cb; /* 边框颜色 */
+        border-radius: .375rem;
+        padding: .75rem;
+    }
+
+    .text-center {
+        text-align: center; /* 居中对齐 */
+    }
+    
+    .contact-info {
+        text-align: right; /* 置右对齐 */
+        font-family: Arial, sans-serif; /* 设置字体 */
+        color: #333; /* 设置文字颜色 */
+        background-color: #f9f9f9; /* 设置背景颜色 */
+        padding: 10px; /* 设置内边距 */
+        border: 1px solid #ddd; /* 设置边框 */
+        border-radius: 5px; /* 设置圆角边框 */
+        margin: 20px 0; /* 设置上下外边距 */
+    }
+</style>
+<div class="background-container"></div>
+
+<div class="container">
+    <h1>登入</h1>
+    <h4>會員</h4>
+    <hr />
+
+    <form asp-action="Login">
+        <div asp-validation-summary="ModelOnly" class="alert-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="MemEmail" class="form-label"></label>
+            <input asp-for="MemEmail" class="form-control" placeholder="輸入信箱" />
+            <span asp-validation-for="MemEmail" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="MemTel" class="form-label"></label>
+            <input asp-for="MemTel" type="password" class="form-control" placeholder="輸入密碼" />
+            <span asp-validation-for="MemTel" class="text-danger"></span>
+        </div>
+
+        <h6 class="contact-info">
+            忘記密碼請通知客服<br>
+            <a href="mailto:monhtly@gmail.com" style="color: #007bff; text-decoration: none;">monhtly@gmail.com</a>
+        </h6>
+        <div class="form-group">
+            <input type="submit" value="登入" class="btn btn-primary" />
+        </div>
+
+        <div class="text-center">
+            <a href="http://localhost:5230/Members/Create" class="custom-button">
+                註冊會員
+            </a>
+        </div>
+    </form>
+</div>
+
+
