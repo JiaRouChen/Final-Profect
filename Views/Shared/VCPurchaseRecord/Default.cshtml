@@ -1,0 +1,68 @@
+﻿@model             IEnumerable<D05Project.Models.PurchaseRecord>
+
+@{
+    Layout = null;
+}
+
+<h3 class="text-center">入庫紀錄</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.sId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.sNo)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.quantity)
+            </th>
+           
+         
+          
+       
+            <th>
+               
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sNo)
+                </td>
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.quantity)
+                </td>
+           
+                
+                <td>
+                    @* @(item.UnitPrice*item.Quantity*(1-@item.Discount)) *@
+                </td>
+                <td>
+                   
+                </td>
+                <td>
+                   
+                
+                    @Html.ActionLink("刪除", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
