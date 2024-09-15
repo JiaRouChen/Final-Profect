@@ -1,0 +1,145 @@
+﻿@model D05Project.Models.Admin
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+@* <hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="aId" class="control-label"></label>
+                <input asp-for="aId" class="form-control" />
+                <span asp-validation-for="aId" class="text-danger"></span>
+            </div>
+            @* <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Gender" /> @Html.DisplayNameFor(model => model.Gender)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Birthday" class="control-label"></label>
+                <input asp-for="Birthday" class="form-control" />
+                <span asp-validation-for="Birthday" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="cId" class="control-label"></label>
+                <input asp-for="cId" class="form-control" />
+                <span asp-validation-for="cId" class="text-danger"></span>
+            </div> *@
+
+         @*    <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" type="password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div> *@
+          @*   <div class="form-group">
+                <label asp-for="sysId" class="control-label"></label>
+                <select asp-for="sysId" class ="form-control" asp-items="ViewBag.sysId"></select>
+            </div> *@
+           @*  <div class="form-group">
+                <input type="submit" value="登入" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div> *@
+
+@* <div>
+    <a asp-action="Index">Back to List</a>
+</div> *@ 
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .background-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('/lib/SeedSourcePhoto/1.JPG');
+            background-size: 50%; /* 根據需要調整 */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            z-index: -1; /* 確保背景在其他內容下方 */
+        }
+
+        .login-container {
+            width: 70%; /* 使容器寬度增加 50% */
+            max-width: none; /* 取消 max-width 限制 */
+            margin: 50px auto;
+            background-color: lightpink;
+            padding: 20px; /* 可選：增加內邊距 */
+            border-radius: 8px; /* 可選：增加圓角效果 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 可選：添加陰影效果 */
+            font-size :2rem;
+        }
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .form-group .form-control {
+            border-radius: 0.25rem;
+        }
+        .form-group .btn {
+            width: 100%;
+        }
+        .text-danger {
+            font-size: 0.875em;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-container"></div>
+
+    <div class="login-container">
+        <div class="login-header">
+            <h1>@ViewData["Title"]</h1>
+            <h4>員工登入</h4>
+            <hr />
+        </div>
+
+        <form asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="aId" class="control-label">員工代碼</label>
+                <input asp-for="aId" class="form-control" placeholder="輸入你的員工代碼" />
+                <span asp-validation-for="aId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password" class="control-label">密碼</label>
+                <input asp-for="Password" class="form-control" type="password" placeholder="輸入密碼" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="登入" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+

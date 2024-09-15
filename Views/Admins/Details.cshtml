@@ -1,0 +1,83 @@
+﻿@model             D05Project.Models.Admin
+
+@{
+    ViewData["Title"] = "Details";
+}
+<head>
+
+    <style>
+        #BackEnd {
+            display: block;
+            text-align: center;
+            margin: 50px auto;
+            font-size: 2rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: #ffffff;
+            background: linear-gradient(135deg, #007bff, #0056b3); /* 漸變背景 */
+            padding: 15px 25px; /* 調整內邊距 */
+            border: 2px solid #0056b3; /* 更細的邊框 */
+            border-radius: 15px; /* 更大的圓角 */
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* 添加陰影 */
+            transition: all 0.3s ease; /* 添加平滑的變換效果 */
+        }
+
+            #BackEnd:hover {
+                transform: scale(1.05); /* 在懸停時稍微放大 */
+                color: #ffffff; /* 保持文字顏色為白色 */
+                background: linear-gradient(135deg, #ff4e50, #f9d423); /* 懸停時的漸變背景 */
+                box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3); /* 增強陰影效果 */
+                border-color: #f9d423; /* 懸停時更改邊框顏色 */
+            }
+    </style>
+</head>
+
+<h1>Details</h1>
+
+<div>
+    <h4>Admin</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Birthday)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Birthday)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.cId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.cId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.sys)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.sys.sysId)
+        </dd>
+    </dl>
+</div>
+<div>
+   @*  <a asp-action="Edit" asp-route-id="@Model?.aId">Edit</a> *@
+    <a id="BackEnd" href="http://localhost:5230/BackEnd/Index">進入後台管理</a>
+ @*    <a asp-action="Index">Back to List</a> *@
+</div>
