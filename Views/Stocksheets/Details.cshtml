@@ -1,0 +1,106 @@
+﻿@model             D05Project.Models.Stocksheet
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f4f4f9;
+    }
+
+    #toggleButton {
+        padding: 12px 24px;
+        font-size: 16px;
+        color: #fff;
+        background-color: #28a745;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+        #toggleButton:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+
+        #toggleButton:active {
+            background-color: #1e7e34;
+        }
+
+    #detailsContainer {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        display: none;
+        opacity: 0;
+        transition: opacity 0.5s ease, max-height 0.5s ease;
+    }
+
+        #detailsContainer.show {
+            display: block;
+            opacity: 1;
+        }
+</style>
+<div>
+    <h4>Stocksheet</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.sDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.sDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.sNote)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.sNote)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.aIdNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.aIdNavigation.aId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.sNo">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+<button id="toggleButton">點我查看記錄</button>
+<div id="detailsContainer">
+    @await Component.InvokeAsync("VCPurchaseRecord", new { id = Model.sNo })
+</div>
+
+
+@* <div>
+    <a asp-action="Edit" asp-route-id="@Model?.sNo">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div> *@
+
+
+
+<script>
+    document.getElementById('toggleButton').addEventListener('click', function () {
+        var detailsContainer = document.getElementById('detailsContainer');
+        if (detailsContainer.classList.contains('show')) {
+            detailsContainer.classList.remove('show');
+            this.textContent = '點我看詳細'; // Change button text
+        } else {
+            detailsContainer.classList.add('show');
+            this.textContent = '隱藏詳細資訊'; // Change button text
+        }
+    });
+</script>
