@@ -1,0 +1,207 @@
+﻿@model D05Project.Models.Cart
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<style>
+    .input-group {
+        display: flex;
+        align-items: center;
+    }
+
+    .input-group .btn {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+        padding: 0;
+        text-align: center;
+    }
+
+    .input-group .form-control {
+        text-align: center;
+        width: 80px; /* Adjust as needed */
+    }
+</style>
+
+<style>
+    .step-indicator {
+        display: flex;
+        justify-content: space-between;
+        width: 60%;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .step {
+        flex: 1;
+        position: relative;
+        padding: 10px;
+    }
+
+    .step-number {
+        width: 40px;
+        height: 40px;
+        margin: 0 auto;
+        border-radius: 50%;
+        background-color: #ccc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .step-label {
+        margin-top: 10px;
+        color: #888;
+    }
+
+    .step.active .step-number {
+        background-color: #bc8a42; /* Gold color */
+    }
+
+    .step.active .step-label {
+        color: #000;
+    }
+
+    /* 移除線條 */
+    .step::before,
+    .step::after {
+        display: none;
+    }
+
+
+
+    #orderIcon {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+    }
+</style>
+
+
+<h1 style="display: flex; align-items: flex-start; justify-content: left; text-align: left; margin: 0;">
+    <img id="orderIcon" src="~/lib/SeedSourcePhoto/1.JPG" alt="Just" margin-right: 10px;">
+    感謝您的訂購!
+</h1>
+    <div class="step-indicator">
+            <div class="step active">
+                <div class="step-number">01</div>
+                <div class="step-label">購物清單</div>
+            </div>
+            <div class="step active">
+                <div class="step-number">02</div>
+                <div class="step-label">填寫資料</div>
+            </div>
+            <div class="step">
+                <div class="step-number">03</div>
+                <div class="step-label">完成訂單</div>
+            </div>
+        </div>
+
+<h4>請填寫以下訂單細節</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="cartId" class="control-label"></label>
+                <input asp-for="cartId" class="form-control" />
+                <span asp-validation-for="cartId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="pId" class="control-label"></label>
+                <select asp-for="pId" class="form-control">
+                    <option value="">-- 選擇產品 --</option>
+                    <option value="P01">番茄紅酒燉牛肉湯</option>
+                    <option value="P02">柑橘蔥雞湯</option>
+                    <option value="P03">梅子剝皮辣椒雞湯</option>
+                    <option value="P04">酸白菜椰奶疏時湯</option>
+                    <option value="P05">馬告可可芋泥甜湯</option>
+                    <option value="P06">地瓜腰果濃湯佐鳳梨</option>
+                </select>
+                <span asp-validation-for="pId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="orderId" class="control-label"></label>
+                <select asp-for="orderId" class="form-control">
+                    <option value="">-- 選擇付款方式 --</option>
+                    <option value="Line Pay">Line Pay</option>
+                    <option value="信用卡支付">信用卡支付</option>
+                    <option value="貨到付款">7-11貨到付款</option>
+                </select>
+                <span asp-validation-for="orderId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="productqty" class="control-label"></label>
+                <div class="input-group">
+                    <button type="button" class="btn btn-secondary" id="decreaseQty">-</button>
+                    <input asp-for="productqty" class="form-control" type="text" id="productQtyInput" value="0" />
+                    <button type="button" class="btn btn-secondary" id="increaseQty">+</button>
+                </div>
+                <span asp-validation-for="productqty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="productprice" class="control-label"></label>
+                <input asp-for="productprice" class="form-control" />
+                <span asp-validation-for="productprice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="productName" class="control-label"></label>
+                <input asp-for="productName" class="form-control" />
+                <span asp-validation-for="productName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MemId" class="control-label"></label>
+                <select asp-for="MemId" class="form-control">
+                    <option value="">-- 選擇產品規格 --</option>
+                    <option value="1200ml">1200ml</option>
+                  
+                    <option value="400ml">400ml</option>
+                   
+                </select>
+                <span asp-validation-for="MemId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="確認結帳" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<br>
+<br>
+<div>
+  @*   <a asp-action="Index">Back to List</a> *@
+    <a href="http://localhost:5230/MainPage/Create" class="btn btn-primary">回首頁</a>
+</div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var productQtyInput = document.getElementById("productQtyInput");
+        var decreaseBtn = document.getElementById("decreaseQty");
+        var increaseBtn = document.getElementById("increaseQty");
+
+        // Initialize quantity value
+        var quantity = parseInt(productQtyInput.value, 10);
+
+        decreaseBtn.addEventListener("click", function() {
+            if (quantity > 0) {
+                quantity--;
+                productQtyInput.value = quantity;
+            }
+        });
+
+        increaseBtn.addEventListener("click", function() {
+            quantity++;
+            productQtyInput.value = quantity;
+        });
+
+        // Update quantity on input change
+        productQtyInput.addEventListener("input", function() {
+            quantity = parseInt(productQtyInput.value, 10);
+        });
+    });
+</script>

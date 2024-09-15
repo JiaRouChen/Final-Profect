@@ -1,0 +1,139 @@
+﻿@model IEnumerable<D05Project.Models.Cart>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    .step-indicator {
+        display: flex;
+        justify-content: space-between;
+        width: 60%;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .step {
+        flex: 1;
+        position: relative;
+        padding: 10px;
+    }
+
+    .step-number {
+        width: 40px;
+        height: 40px;
+        margin: 0 auto;
+        border-radius: 50%;
+        background-color: #ccc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .step-label {
+        margin-top: 10px;
+        color: #888;
+    }
+
+    .step.active .step-number {
+        background-color: #bc8a42; /* Gold color */
+    }
+
+    .step.active .step-label {
+        color: #000;
+    }
+
+    /* 移除線條 */
+    .step::before,
+    .step::after {
+        display: none;
+    }
+</style>
+
+<h1>訂單管理</h1>
+
+<body>
+    <div class="step-indicator">
+        <div class="step active">
+            <div class="step-number">01</div>
+            <div class="step-label">購物清單</div>
+        </div>
+        <div class="step active">
+            <div class="step-number">02</div>
+            <div class="step-label">填寫資料</div>
+        </div>
+        <div class="step active">
+            <div class="step-number">03</div>
+            <div class="step-label">完成訂單</div>
+        </div>
+    </div>
+</body>
+<h3>
+    <a asp-action="Create">人工新增訂單</a>
+</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.cartId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.orderId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.productqty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.productprice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.productName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MemId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cartId)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.orderId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.productqty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.productprice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.productName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MemId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.cartId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.cartId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.cartId">Delete</a>
+            </td>
+
+        </tr>
+           
+}
+    </tbody>
+</table>
+<a href="http://localhost:5230/MainPage/Create" class="btn btn-primary">回首頁</a>
+
