@@ -1,0 +1,182 @@
+﻿@* @model IEnumerable<D05Project.Models.Product> *@
+
+@model D05Project.ViewModels.VMProduct
+
+@{
+    ViewData["Title"] = "商品資料管理";
+}
+
+<h1 class="text-center shadow my-3 p-4">@ViewData["Title"]</h1>
+<style>
+    #menu {
+        width: 250px;
+        background-color: #333;
+        color: white;
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100%;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        padding: 20px;
+        z-index: 1000;
+    }
+
+        #menu a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            font-size: 18px;
+        }
+
+            #menu a:hover {
+                background-color: #575757;
+            }
+
+    #menuButton {
+        position: fixed;
+        left: 20px;
+        top: 0px;
+        background-color: #333;
+        color: white;
+        border: none;
+        padding: 0px;
+        border-radius: 5px;
+        cursor: pointer;
+        z-index: 1001;
+        font-size: 50px;
+    }
+
+    #menu.show {
+        transform: translateX(0);
+    }
+</style>
+
+
+<div class="row">
+
+    <div class="col-3">
+
+        <h2 class="text-center">商品類別</h2>
+        <div class="list-group">
+            @foreach (var item in Model.Category)
+            {
+                <a asp-action="Index" class="list-group-item list-group-item-action text-center" asp-route-catId="@item.catId">@item.catName</a>
+
+                <br />
+            }
+
+        </div>
+    </div>
+
+
+    <div class="col-9">
+        <h2 class="text-center">
+            目前呈現 @ViewData["catName"]類別的商品資料
+        </h2>
+
+        <p class="text-end">
+
+            <a asp-action="Create" asp-route-categoryID="@ViewData["catId"]" class="btn btn-primary btn-lg"><i class="bi bi-bag-plus-fill"></i> 新增商品</a>
+        </p>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Product.FirstOrDefault().pId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Product.FirstOrDefault().unit)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Product.FirstOrDefault().saveQuantity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Product.FirstOrDefault().quantity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Product.FirstOrDefault().prodoctName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Product.FirstOrDefault().prodoctPrice)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Product.FirstOrDefault().cat)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Product.FirstOrDefault().sIdNavigation)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Product)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.pId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.unit)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.saveQuantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.prodoctName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.prodoctPrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.cat.catId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.sIdNavigation.sId)
+                        </td>
+                        @*   <td>
+                    <a asp-action="Edit" asp-route-id="@item.pId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.pId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.pId">Delete</a>
+                    </td> *@
+
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.pId"><i class="bi bi-pencil-square fs-2"></i></a> |
+                            <a asp-action="Details" asp-route-id="@item.pId"><i class="bi bi-window-stack fs-2"></i></a> |
+                            <a asp-action="Delete" asp-route-id="@item.pId"><i class="bi bi-trash3 fs-2"></i></a>
+                        </td>
+                    </tr>
+                }
+
+                <button id="menuButton">☰</button>
+
+                <div id="menu">
+                    <br><br>
+                    <a href="http://localhost:5230/ProcurmentSheets/Index">入庫記錄查詢</a>
+                    <a href="http://localhost:5230/Stocksheets/Index">出庫記錄查詢</a>
+                    <a href="http://localhost:5230/Members/Index">會員管理</a>
+                    <a href="http://localhost:5230/Admins/Index">員工管理</a>
+                    <a href="http://localhost:5230/SysAdmins/Index">聯絡我們</a>
+                    <a href="http://localhost:5230/Products/Index">產品管理</a>
+                    <a href="http://localhost:5230/Orders/Index">訂單明細管理</a>
+                    <a href="http://localhost:5230/Suppliers/Index">供應商管理</a>
+                    <a href="http://localhost:5230/Categories/Index">商品種類維護</a>
+                    <a href="http://localhost:5230/Carts/Index">客戶直接下單紀錄</a>
+                    <a href="http://localhost:5230/BackEnd/Index">回後台首頁</a>
+                </div>
+            </tbody>
+        </table>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const menuButton = document.getElementById('menuButton');
+                const menu = document.getElementById('menu');
+
+                menuButton.addEventListener('click', function () {
+                    menu.classList.toggle('show');
+                });
+            });
+        </script>

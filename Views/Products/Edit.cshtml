@@ -1,0 +1,61 @@
+﻿@model             D05Project.Models.Product
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Product</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="sId" class="control-label"></label>
+                <select asp-for="sId" class="form-control" asp-items="ViewBag.sId"></select>
+                <span asp-validation-for="sId" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="pId" />
+            <div class="form-group">
+                <label asp-for="unit" class="control-label"></label>
+                <input asp-for="unit" class="form-control" />
+                <span asp-validation-for="unit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="saveQuantity" class="control-label"></label>
+                <input asp-for="saveQuantity" class="form-control" />
+                <span asp-validation-for="saveQuantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="quantity" class="control-label"></label>
+                <input asp-for="quantity" class="form-control" />
+                <span asp-validation-for="quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="prodoctName" class="control-label"></label>
+                <input asp-for="prodoctName" class="form-control" />
+                <span asp-validation-for="prodoctName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="catId" class="control-label"></label>
+                <select asp-for="catId" class="form-control" asp-items="ViewBag.catId"></select>
+                <span asp-validation-for="catId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="prodoctPrice" class="control-label"></label>
+                <input asp-for="prodoctPrice" class="form-control" />
+                <span asp-validation-for="prodoctPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
