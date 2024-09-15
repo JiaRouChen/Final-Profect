@@ -1,0 +1,48 @@
+﻿@model             D05Project.Models.SysAdmin
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>SysAdmin</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.sysname)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.sysname)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.sysgender)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.sysgender)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.sysbirthday)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.sysbirthday)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.syscId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.syscId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.syspassword)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.syspassword)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.sysId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

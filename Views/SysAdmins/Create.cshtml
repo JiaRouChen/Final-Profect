@@ -1,0 +1,281 @@
+﻿ @model             D05Project.Models.SysAdmin
+
+@{
+    ViewData["Title"] = "Create";
+}
+<html>
+<head>
+@* <h1>Create</h1>
+
+<h4>SysAdmin</h4> *@
+<hr />
+<style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column; /* 改为垂直排列 */
+            min-height: 100vh; /* 确保 body 的最小高度为视口高度 */
+        }
+
+        .main-content {
+            flex: 1; /* 使内容区域占据剩余空间 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-container {
+            background-color: antiquewhite;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 1200px;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+            .form-group label {
+                flex: 0 0 100px;
+                font-size: 16px;
+                color: #333;
+                margin-right: 10px;
+            }
+
+            .form-group input {
+                flex: 1;
+                padding: 8px;
+                font-size: 16px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+                .form-group input:focus {
+                    border-color: #888;
+                    outline: none;
+                }
+
+            .form-group .required {
+                color: red;
+                margin-left: 5px;
+            }
+
+        hr {
+            border: none;
+            border-top: 1px solid #ccc;
+            margin: 20px 0;
+        }
+
+        .submit-btn {
+            background-color: #6F4F28; /* 咖啡色 */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+            .submit-btn:hover {
+                background-color: #5a3e1f;
+            }
+
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            width: 60%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .step {
+            flex: 1;
+            position: relative;
+            padding: 10px;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto;
+            border-radius: 50%;
+            background-color: #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .step-label {
+            margin-top: 10px;
+            color: #888;
+        }
+
+        .step.active .step-number {
+            background-color: #bc8a42; /* Gold color */
+        }
+
+        .step.active .step-label {
+            color: #000;
+        }
+
+        .step::before,
+        .step::after {
+            display: none;
+        }
+
+        footer {
+            background-color: lightyellow;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div class="step-indicator">
+        <div class="step active">
+            <div class="step-number">01</div>
+            <div class="step-label">購物清單</div>
+        </div>
+        <div class="step active">
+            <div class="step-number">02</div>
+            <div class="step-label">填寫資料</div>
+        </div>
+        <div class="step">
+            <div class="step-number">03</div>
+            <div class="step-label">完成訂單</div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="form-container">
+            <h2>訂購人資料</h2>
+            <hr />
+            <form asp-action="Create" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="sysId" class="control-label">姓名<span class="required">*</span></label>
+                    <input asp-for="sysId" class="form-control" />
+                    <span asp-validation-for="sysId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="sysname" class="control-label">居住縣市<span class="required">*</span></label>
+                    <input asp-for="sysname" class="form-control" />
+                    <span asp-validation-for="sysname" class="text-danger"></span>
+                </div>
+                @* <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="sysgender" /> @Html.DisplayNameFor(model => model.sysgender)
+                    </label>
+                </div> *@
+                <div class="form-group">
+                    <label asp-for="sysbirthday" class="control-label">下單日<span class="required">*</span></label>
+                    <input asp-for="sysbirthday" class="form-control" readonly="readonly" />
+                    <span asp-validation-for="sysbirthday" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="syscId" class="control-label">行動電話<span class="required">*</span></label>
+                    <input asp-for="syscId" class="form-control" />
+                    <span asp-validation-for="syscId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="syspassword" class="control-label">聯絡地址
+                        <br>(無須填寫縣市)<span class="required">*</span></label>
+                    <input asp-for="syspassword" class="form-control"  />
+                    <span asp-validation-for="syspassword" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <a href="javascript:void(0);" class="submit-btn" onclick="this.closest('form').submit();">提交資料</a>
+                </div>
+
+            </form>
+            <button onclick="window.location.href='http://localhost:5230/SysAdmins/Index';">校閱儲存資料</button>
+        </div>
+        </div>
+    </div>
+
+ 
+</body>
+</html>
+<div>
+    <br></br>
+</div>
+
+
+
+
+
+@* @model             D05Project.Models.SysAdmin
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>SysAdmin</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="sysId" class="control-label"></label>
+                <input asp-for="sysId" class="form-control" />
+                <span asp-validation-for="sysId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="sysname" class="control-label"></label>
+                <input asp-for="sysname" class="form-control" />
+                <span asp-validation-for="sysname" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="sysgender" /> @Html.DisplayNameFor(model => model.sysgender)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="sysbirthday" class="control-label"></label>
+                <input asp-for="sysbirthday" class="form-control" />
+                <span asp-validation-for="sysbirthday" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="syscId" class="control-label"></label>
+                <input asp-for="syscId" class="form-control" />
+                <span asp-validation-for="syscId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="syspassword" class="control-label"></label>
+                <input asp-for="syspassword" class="form-control" />
+                <span asp-validation-for="syspassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+ *@
